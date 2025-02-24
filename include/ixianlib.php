@@ -59,7 +59,7 @@ function addressFromNonce($addressOrPubKey, $nonce)
     {
         $version = unpack("C", $addressOrPubKey)[1];
     }
-    
+
     if($version == 0)
     {
         return addressFromNonce_v0($addressOrPubKey, $nonce);
@@ -96,11 +96,14 @@ function addressFromNonce_v0($addressOrPubKey, $nonce)
         $rawAddress = "\x00".sha512quTrunc($addressOrPubKey, $public_key_offset);
         $baseAddress = addAddressChecksum($rawAddress);
     }
-    
-    if(($nonce == 0 && strlen($nonce) == 1) || ($nonce == "" && strlen($nonce) == 0))
+
+    if(($nonce == 0 && strlen($nonce) == 1) 
+        || $nonce === "\0" 
+        || ($nonce == "" && strlen($nonce) == 0))
     {
         return $baseAddress;
-    }else
+    }
+    else
     {
         $rawAddress = "\x00".sha512quTrunc($baseAddress.$nonce);
         $binAddress = addAddressChecksum($rawAddress);
@@ -120,10 +123,13 @@ function addressFromNonce_v1($addressOrPubKey, $nonce)
         $baseAddress = addAddressChecksum($rawAddress);
     }
     
-    if(($nonce == 0 && strlen($nonce) == 1) || ($nonce == "" && strlen($nonce) == 0))
+    if(($nonce == 0 && strlen($nonce) == 1)
+        || $nonce === "\0" 
+        || ($nonce == "" && strlen($nonce) == 0))
     {
         return $baseAddress;
-    }else
+    }
+    else
     {
         $rawAddress = "\x01".sha512sqTrunc($baseAddress.$nonce, 5);
         $binAddress = addAddressChecksum($rawAddress);
@@ -143,10 +149,13 @@ function addressFromNonce_v2($addressOrPubKey, $nonce)
         $baseAddress = $rawAddress;
     }
     
-    if(($nonce == 0 && strlen($nonce) == 1) || ($nonce == "" && strlen($nonce) == 0))
+    if(($nonce == 0 && strlen($nonce) == 1) 
+        || $nonce === "\0" 
+        || ($nonce == "" && strlen($nonce) == 0))
     {
         return $baseAddress;
-    }else
+    }
+    else
     {
         $rawAddress = "\x02".sha3_512sqTrunc($baseAddress.$nonce, 0);      
         return $rawAddress;
