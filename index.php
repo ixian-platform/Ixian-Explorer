@@ -10,6 +10,9 @@ include_once("wallets.php");
 
 $current_page = "home";
 
+//ixiscope version
+$ixiscope_version = "0.1.1";
+
 if(isset($_GET['p']))
 {
     $new_page = $_GET['p'];
