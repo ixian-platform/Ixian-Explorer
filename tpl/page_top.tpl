@@ -32,7 +32,7 @@
                             <p class="label-sm t-gray">Top 20 Wallet Amount (excluding foundation and exchange wallets)</p>
                             <div class="tooltip-container">
                                 <i class="fa fa-question-circle"></i>
-                                <span class="myTooltip">The amount of IXI held by top 20 wallets. This includes locked genesis amount and IXI held on exchange wallets.</span>
+                                <span class="myTooltip">The amount of IXI held by top 20 wallets. This excludes locked genesis amount and IXI held on exchange wallets.</span>
                             </div>
                         </div>
                     </div>

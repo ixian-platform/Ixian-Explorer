@@ -16,6 +16,17 @@
     <meta property="og:url" content="https://explorer.ixian.io" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ixiscope" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ixian Block Explorer" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ixian Block Explorer | Analyze Blocks, Transactions & Network Activity" />
+    <meta name="twitter:description" content="Explore the Ixian blockchain with real-time transaction tracking, block details, and network insights." />
+    <meta name="twitter:image" content="https://explorer.ixian.io/gfx/og-ixiscope.jpg" />
+    <meta name="twitter:image:width" content="1200" />
+    <meta name="twitter:image:height" content="630" />
+    <meta name="twitter:image:alt" content="Ixian Block Explorer" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
