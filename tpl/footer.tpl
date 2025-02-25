@@ -21,10 +21,10 @@
                 </div>
                 <div class="topLinks">
                     <p class="label-sm t-gray-2">Links</p>
-                    <a target="_blank" href="https://www.ixian.io/" class="label-sm">Ixian <i class="fa fa-arrow-up-right-from-square fa-sm"></i></a>
-                    <a target="_blank" href="https://docs.ixian.io/" class="label-sm">Documentation <i class="fa fa-arrow-up-right-from-square fa-sm"></i></a>
-                    <a target="_blank" href="https://www.ixian.io/?page=downloads" class="label-sm">Downloads <i class="fa fa-arrow-up-right-from-square fa-sm"></i></a>
-                    <a target="_blank" href="https://github.com/projectixian" class="label-sm">Github <i class="fa fa-arrow-up-right-from-square fa-sm"></i></a>
+                    <a target="_blank" href="https://www.ixian.io/" class="label-sm">Ixian</a>
+                    <a target="_blank" href="https://docs.ixian.io/" class="label-sm">Documentation</a>
+                    <a target="_blank" href="https://www.ixian.io/get-involved#resources" class="label-sm">Downloads</a>
+                    <a target="_blank" href="https://github.com/ixian-platform" class="label-sm">GitHub</a>
                 </div>
             </div>
         </div>

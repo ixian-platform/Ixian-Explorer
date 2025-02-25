@@ -35,3 +35,7 @@
     gap: 12px;
     min-height: 80px;
 }
+
+.nodesSpecificGrid{
+    grid-template-columns: 1fr 1fr !important;
+}

@@ -27,7 +27,7 @@
                 </div>
                 <div class="ixiCard">
                     <div class="flexCGap8">
-                        <p class="heading-sm"><?php echo $this->totalAmount;?></p>
+                        <p class="heading-sm"><?php echo $this->totalAmountWithoutKnownWallets;?></p>
                         <div class="tooltipWrapperHelper">
                             <p class="label-sm t-gray">Top 20 Wallet Amount (excluding foundation and exchange wallets)</p>
                             <div class="tooltip-container">
