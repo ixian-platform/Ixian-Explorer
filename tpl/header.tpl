@@ -5,10 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>ixiscope</title>
+    <title>Ixian Block Explorer | Analyze Blocks, Transactions & Network Activity</title>
     <meta name="description"
-          content="Ixian is a fully scalable, decentralized platform that enables encrypted data streaming and high volume of micro-transactions.">
-    <meta name="keywords" content="Ixian,DLT,Blockchain,Cryptocurrency,Crypto,IXI,Explorer,Spixi">
+          content="Explore the Ixian blockchain with real-time transaction tracking, block details, and network insights.">
+    <meta name="keywords" content="Ixian,DLT,Blockchain,Cryptocurrency,Crypto,IXI,Explorer,Spixi, transactions, blocks, nodes, statistics, emissions">
+
+    <meta property="og:title" content="Ixian Block Explorer | Analyze Blocks, Transactions & Network Activity" />
+    <meta property="og:description" content="Explore the Ixian blockchain with real-time transaction tracking, block details, and network insights." />
+    <meta property="og:image" content="https://explorer.ixian.io/gfx/og-ixiscope.jpg" />
+    <meta property="og:url" content="https://explorer.ixian.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ixiscope" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ixian Block Explorer" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ixian Block Explorer | Analyze Blocks, Transactions & Network Activity" />
+    <meta name="twitter:description" content="Explore the Ixian blockchain with real-time transaction tracking, block details, and network insights." />
+    <meta name="twitter:image" content="https://explorer.ixian.io/gfx/og-ixiscope.jpg" />
+    <meta name="twitter:image:width" content="1200" />
+    <meta name="twitter:image:height" content="630" />
+    <meta name="twitter:image:alt" content="Ixian Block Explorer" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
 
     <link href="vendor/fontawesome-free-6.7.1-web/css/all.css" rel="stylesheet" type="text/css">
     <link href="<?php echo versionedAsset('css/sb-admin-2.css'); ?>" rel="stylesheet">

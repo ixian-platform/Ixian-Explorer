@@ -288,7 +288,6 @@
 
 /* Display Classes */
 .display-lg {
-    font-family: var(--type-font-family-primary), sans-serif;
     font-size: var(--font-size-display-display-lg);
     line-height: var(--line-height-display-display-lg);
     letter-spacing: var(--tracking-display-display-lg);
@@ -296,7 +295,6 @@
 }
 
 .display-md {
-    font-family: var(--type-font-family-primary), sans-serif;
     font-size: var(--font-size-display-display-md);
     line-height: var(--line-height-display-display-md);
     letter-spacing: var(--tracking-display-display-md);
@@ -305,7 +303,6 @@
 
 /* Heading Classes */
 .heading-lg {
-    font-family: var(--type-font-family-primary), sans-serif;
     font-size: var(--font-size-heading-heading-lg);
     line-height: var(--line-height-heading-heading-lg);
     letter-spacing: var(--tracking-heading-heading-lg);
@@ -313,16 +310,13 @@
 }
 
 .heading-md {
-    font-family: var(--type-font-family-primary), sans-serif;
     font-size: var(--font-size-heading-heading-md);
     line-height: var(--line-height-heading-heading-md);
     letter-spacing: var(--tracking-heading-heading-md);
-    font: var(--type-font-family-primary);
     font-weight: 700;
 }
 
 .heading-sm {
-    font-family: var(--type-font-family-primary), sans-serif;
     font-size: var(--font-size-heading-heading-sm);
     line-height: var(--line-height-heading-heading-sm);
     letter-spacing: var(--tracking-heading-heading-sm);
@@ -330,7 +324,6 @@
 }
 
 .heading-xs {
-    font-family: var(--type-font-family-primary), sans-serif;
     font-size: var(--font-size-heading-heading-xs);
     line-height: var(--line-height-heading-heading-xs);
     letter-spacing: var(--tracking-heading-heading-xs);

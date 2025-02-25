@@ -13,11 +13,19 @@ if ($data != 0) {
 }
 
 $totalAmount = 0;
+$totalAmountWithoutKnownWallets = 0;
+
 foreach($data as $addr) {
     $totalAmount += $addr["amount"];
+
+    // Check if the address is not in the known wallets list and add it to the total amount without known wallets
+    if (!array_key_exists($addr["address"], $known_wallets)) {
+        $totalAmountWithoutKnownWallets += $addr["amount"];
+    }
 }
 
 $page->totalAmount = number_format($totalAmount);
+$page->totalAmountWithoutKnownWallets = number_format($totalAmountWithoutKnownWallets);
 $page->data = $data;
 
 $laststat = db_fetch("SELECT * FROM ixi_nodestats ORDER BY blockheight DESC LIMIT 1", [])[0];
