@@ -84,7 +84,8 @@ function calculateRewardForBlock($blockNum)
 function redirectSearch($query)
 {
     if(!ctype_digit($query))
-    {      
+    {
+        $query = explode("_", $query)[0];
         $data = db_fetch("SELECT * FROM ixi_addresses WHERE BINARY address = :1  LIMIT 1", [ ":1" => $query ]);
         if ($data != false && count($data) > 0) {
             header("Location: index.php?p=address&id=$query");

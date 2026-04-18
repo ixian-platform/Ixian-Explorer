@@ -9,6 +9,7 @@ $page = new Template();
 $walid = "";
 if(isset($_GET['id']) && $_GET['id'] != "") {
     $walid = $_GET['id'];
+    $walid = explode("_", $walid)[0];
 /*    if(ctype_alnum($txid))
     {
         $page->render('page_error.tpl');

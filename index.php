@@ -11,7 +11,7 @@ include_once("wallets.php");
 $current_page = "home";
 
 //ixiscope version
-$ixiscope_version = "0.1.1";
+$ixiscope_version = "0.2.0";
 
 if(isset($_GET['p']))
 {

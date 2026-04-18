@@ -55,7 +55,7 @@ function addBlock($ssh, $num, $prevBlockTimestamp = 0, $updateNextBlockTime = fa
 {
     echo "\n$num";
 
-	$api_url = "getfullblock?num=$num";
+	$api_url = "getBlock?num=$num";
 	$data = callIxianAPI($ssh, $api_url); 
 	
     if(!$data)
@@ -104,6 +104,7 @@ function addBlock($ssh, $num, $prevBlockTimestamp = 0, $updateNextBlockTime = fa
 
     $addrcache = array(); // Address cache to process stress-test blocks faster
 
+    //$txs = json_decode($data["Transactions"], true);
     
     // Go through each transaction
     foreach($txids as &$txid)
@@ -125,6 +126,8 @@ function addBlock($ssh, $num, $prevBlockTimestamp = 0, $updateNextBlockTime = fa
         //echo "$txid <br/>";
 		$api_url = "gettransaction?id=$txid";
 		$txdata = callIxianAPI($ssh, $api_url);
+
+        //$txdata = array_values(array_filter($txs, function($value) use($txid) { return ($value["id"] == $txid); }))[0] ?? null;
 		
         if(!$txdata)
         {
@@ -144,7 +147,7 @@ function addBlock($ssh, $num, $prevBlockTimestamp = 0, $updateNextBlockTime = fa
             $txdatad = $txdata["data"];
 
         db_fetch("INSERT INTO `ixi_transactions` (`txid`, `blockNr`, `nonce`, `signature`, `data`, `timestamp`, `type`, `amount`, `applied`, `checksum`, `from`, `to`, `fee`, `version`, `tainted`) VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14, 0)",
-                [ ":1" => $txid, ":2" => $txdata["blockHeight"], ":3" => $txdata["nonce"], ":4" => $txdata["signature"], ":5" => $txdatad, ":6" => $txdata["timestamp"], ":7" => $txdata["type"], ":8" => $txdata["amount"], ":9" => $txdata["applied"], ":10" => $txdata["checksum"], ":11" => $txfrom, ":12" => $txto, ":13" => $txdata["fee"], ":14" => $txdata["version"] ]);
+                [ ":1" => $txid, ":2" => $txdata["blockHeight"], ":3" => $txdata["nonce"], ":4" => $txdata["signature"], ":5" => $txdatad, ":6" => $data["Timestamp"], ":7" => $txdata["type"], ":8" => $txdata["amount"], ":9" => $txdata["applied"], ":10" => $txdata["checksum"], ":11" => $txfrom, ":12" => $txto, ":13" => $txdata["fee"], ":14" => $txdata["version"] ]);
 
         $txidx = 0;
         $res = db_fetch("SELECT id from `ixi_transactions` WHERE txid = :1 LIMIT 1", [ ":1" => $txid]);
