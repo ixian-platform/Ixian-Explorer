@@ -78,7 +78,7 @@
                         <p class="label-sm t-gray">Average Transactions Per Day</p>
                         <div class="tooltip-container">
                             <i class="fa fa-question-circle"></i>
-                            <span class="myTooltip">Average number of transactions per day (since the first block was added to the blockchain).</span>
+                            <span class="myTooltip">Average number of transactions per day (last 30 days).</span>
                         </div>
                     </div>
                 </div>

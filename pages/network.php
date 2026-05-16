@@ -8,6 +8,7 @@ include_once("include/ixian.php");
 $page = new Template();
 
 $numblocks = 2880;
+$blockPowCalculationTime = 900; // 900 seconds (30 blocks)
 
 $page->numblocks = $numblocks;
 
@@ -71,11 +72,11 @@ $page->reqsigcount = $reqsigcount;
 $page->totalsigdiff = $totalsigdiff;
 $page->reqsigdiff = $reqsigdiff;
 
-$stakers = 0;
+$signers = 0;
 $requiredsigners = 0;
 $data = db_fetch("SELECT * FROM ixi_blocks ORDER BY id DESC LIMIT 1", [ ]);
 if ($data != 0) {
-    $stakers = $data[0]["sigCount"];
+    $signers = $data[0]["sigCount"];
     $requiredsigners = $data[0]["sigRequired"];
 }
 
@@ -86,7 +87,7 @@ if ($laststat != 0) {
 
 $page->bh = $laststat['blockheight'];
 $page->blockratio = $laststat['blockratio'];
-$page->hashrate = number_format($laststat['hashrate']);
+$page->hashrate = number_format($totalsigdiff / $blockPowCalculationTime);
 
 $page->m = $laststat['nodes-m'];
 $page->r = $laststat['nodes-r'];
@@ -96,7 +97,7 @@ $page->c = $laststat['nodes-c'];
 $page->miningreward = number_format(calculateMiningRewardForBlock($page->bh),2);
 
 $page->blockstake = calculateStakingReward($laststat['blockheight'], $laststat['totalixi']);
-$page->stakers = $stakers;
+$page->signers = $signers;
 $page->requiredsigners = $requiredsigners;
 
 $page->render('page_network.tpl');

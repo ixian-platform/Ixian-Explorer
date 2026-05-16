@@ -169,7 +169,7 @@
             <div class="alertContainer">
             <div class="alertCardWarning">
             <i class="fa fa-hourglass-start"></i>
-            <p class="body-sm"><span class="label-sm">ixiscope DLT Node is synchronizing.</span> Data may be out of date, please try again later.</p>
+            <p class="body-sm"><span class="label-sm">IXIScope is synchronizing.</span> Data may be out of date, please try again later.</p>
             </div>
             </div>
             <?php }?>

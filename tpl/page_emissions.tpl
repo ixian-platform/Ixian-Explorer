@@ -5,14 +5,14 @@
 <section class="pageContainer">
         <section class="emissionsHeader pageLimitWrapper">
             <h1 class="heading-lg">IXI Emissions</h1>
-            <p class="body-md"> This page contains all information regarding the IXI emission model, which includes the mining and signing block rewards, as well as the projected number of total IXI in circulation at any given block height.</p>
+            <p class="body-md"> This page contains all information regarding the IXI emission model, which includes the Argon2 mining and PoCW signing block rewards, as well as the projected number of total IXI in circulation at any given block height.</p>
         </section>
     <div class="bg-1">
         <section class="emissionBlocks pageLimitWrapper flexCGap32">
             <div class="blockStatusCard">
                 <div class="blockStatusCardHeader">
                     <div>
-                        <h3 class="heading-sm">Mining Block Reward Chart</h3>
+                        <h3 class="heading-sm">Argon2 Block Mining Reward Chart</h3>
                         <p class="body-md">Data below shows the mining reward for every block mined.</p>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                         <canvas id="chart-0"></canvas>
                     </div>
                     <div class="rewardsRules">
-                        <p class="label-md">IXI emission model for mining rewards:</p>
+                        <p class="label-md">IXI emission model for Argon2 mining rewards:</p>
                             <ul>
                                 <li>
                                     Mining reward starts with 10 IXI and increases by 0.009 IXI with every block until block height #1051200.
@@ -29,9 +29,6 @@
                                 </li>
                                 <li>Mining reward is set to 4740 IXI per block until block height #1802000.</li>
                                 <li>Mining reward is set to 2304 IXI per block until block height #6307200.</li>
-                                <li>Mining reward is set to 1152 IXI per block until block height #9460800.</li>
-                                <li>Mining reward is set to 576 IXI per block until block height #12614400.</li>
-                                <li>Mining reward is set to 18 IXI per block until block height #105120000.</li>
                             </ul>
                     </div>
                 </div>
@@ -40,8 +37,8 @@
             <div class="blockStatusCard">
                 <div class="blockStatusCardHeader">
                     <div>
-                        <h3 class="heading-sm">Signing Block Reward Chart</h3>
-                        <p class="body-md">Data below  shows the projected signing reward for every block signed.</p>
+                        <h3 class="heading-sm">Block Signing Reward Chart</h3>
+                        <p class="body-md">Data below shows the projected signing reward for every block signed.</p>
                     </div>
                 </div>
                 <div class="blockStatusCardBottomSection">
@@ -57,10 +54,11 @@
                                 </li>
                                 <li>Signing reward is set to 5% of the total supply per year until block height #1802000.</li>
                                 <li>Signing reward is set to 576 IXI per block until block height #6307200.</li>
-                                <li>Signing reward is set to 288 IXI per block until block height #9460800.</li>
-                                <li>Signing reward is set to 144 IXI per block until block height #12614400.</li>
-                                <li>Signing reward is set to 72 IXI per block until block height #15768000.</li>
-                                <li>Signing reward is fixed to 36 IXI per block after block height #15768000.</li>
+                                <li>Signing reward is set to 864 IXI per block until block height #9460800.</li>
+                                <li>Signing reward is set to 432 IXI per block until block height #12614400.</li>
+                                <li>Signing reward is set to 81 IXI per block until block height #15768000.</li>
+                                <li>Signing reward is set to 45 IXI per block until block height #105120000.</li>
+                                <li>Signing reward is fixed to 36 IXI per block after block height #105120000.</li>
                             </ul>
                         </div>
                 </div>
@@ -161,7 +159,7 @@ var myLineChart = new Chart(ctx, {
       pointBorderWidth: 1,
       steppedLine: true,
       data: [
-        10, 399, 1135, 2260, 3385, 4510, 4740, 4740, 4740, 4740, 4740, 4740, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18
+        10, 399, 1135, 2260, 3385, 4510, 4740, 4740, 4740, 4740, 4740, 4740, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 2304, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       ],
       yAxisID: 'yaxis0'
     },
@@ -278,7 +276,7 @@ var myLineChart1 = new Chart(ctx1, {
           pointBorderWidth: 1,
           steppedLine: true,
           data: [        
-            2, 2, 104, 116, 136, 162, 168, 168, 194, 226, 259, 266, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 288, 288, 288, 288, 288, 288, 288, 288, 288, 288, 288, 288, 288, 288, 144, 144, 144, 144, 144, 144, 144, 144, 144, 144, 144, 144, 144, 144, 144, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 36, 36
+            2, 2, 104, 116, 136, 162, 168, 168, 194, 226, 259, 266, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 576, 864, 864, 864, 864, 864, 864, 864, 864, 864, 864, 864, 864, 864, 864, 432, 432, 432, 432, 432, 432, 432, 432, 432, 432, 432, 432, 432, 432, 432, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 45, 45
           ],
           yAxisID: 'yaxis0'
         },

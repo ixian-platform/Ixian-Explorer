@@ -7,7 +7,7 @@
         <div class="statsHeader">
             <div class="flexCGap8">
                 <h1 class="heading-lg">Ixian Stats</h1>
-                <p class="body-md">All ixian block and mining stats</p>
+                <p class="body-md">All ixian block signing stats.</p>
             </div>
             <div class="ixiCard">
                 <div class="flexCGap8">
@@ -30,12 +30,12 @@
             <div class="statsCardContainer">
                 <div class="ixiCard">
                     <div class="flexCGap8">
-                        <p class="heading-sm"><?php echo $this->stakers;?></p>
+                        <p class="heading-sm"><?php echo $this->signers;?></p>
                         <div class="tooltipWrapperHelper">
                             <p class="label-sm t-gray">Last Block Signer Count</p>
                             <div class="tooltip-container">
                                 <i class="fa fa-question-circle"></i>
-                                <span class="myTooltip">Amount of nodes that signed the last valid block.</span>
+                                <span class="myTooltip">Number of nodes that signed the last valid block. Maximum number of signers is 1000 signers per block. Nodes with higher hash rate have priority.</span>
                             </div>
                         </div>
                     </div>
@@ -43,6 +43,7 @@
                         <img class="theme-dependent" data-icon="all_match.svg" alt="all_match" />
                     </div>
                 </div>
+
                 <div class="ixiCard">
                     <div class="flexCGap8">
                         <p class="heading-sm"><?php echo $this->requiredsigners;?></p>
@@ -50,7 +51,7 @@
                             <p class="label-sm t-gray">Required Signers</p>
                             <div class="tooltip-container">
                                 <i class="fa fa-question-circle"></i>
-                                <span class="myTooltip">Minimum required signatures for the last block accepted</span>
+                                <span class="myTooltip">Minimum required signatures for the last block accepted.</span>
                             </div>
                         </div>
                     </div>
@@ -58,6 +59,7 @@
                         <img class="theme-dependent" data-icon="orbit.svg" alt="orbit" />
                     </div>
                 </div>
+
                 <div class="ixiCard">
                     <div class="flexCGap8">
                         <p class="heading-sm"><?php echo $this->blockstake;?></p>
@@ -73,34 +75,15 @@
                         <img class="theme-dependent" data-icon="ixian_logo.svg" alt="ixi" />
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="statsContent">
-            <p class="heading-sm t-gray">Mining Stats</p>
-            <div class="statsCardContainer">
-                <div class="ixiCard">
-                    <div class="flexCGap8">
-                        <p class="heading-sm"><?php echo number_format($this->blockratio,2);?>%</p>
-                        <div class="tooltipWrapperHelper">
-                            <p class="label-sm t-gray">Unsolved Blocks Ratio</p>
-                            <div class="tooltip-container">
-                                <i class="fa fa-question-circle"></i>
-                                <span class="myTooltip">This represents the percentage of unsolved blocks in the redacted window (up to last 20000 blocks). Every miner can choose to mine any block in the redacted window that hasn't been solved yet. Target ratio is 50%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress progress-sm" style="width: 100%;max-width: 100px;height: 20px;background: #ABAEFA">
-                        <div class="progress-bar t-blue" role="progressbar" style="width: <?php echo $this->blockratio;?>%" aria-valuenow="<?php echo $this->blockratio;?>" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
+                
                 <div class="ixiCard">
                     <div class="flexCGap8">
                         <p class="heading-sm"><?php echo $this->hashrate;?></p>
                         <div class="tooltipWrapperHelper">
-                            <p class="label-sm t-gray">Estimated Hash-rate (h/s)</p>
+                            <p class="label-sm t-gray">Last Block Signer Difficulty</p>
                             <div class="tooltip-container">
                                 <i class="fa fa-question-circle"></i>
-                                <span class="myTooltip">Combined hash-rate of all Ixian DLT nodes currently connected to the network.</span>
+                                <span class="myTooltip">Combined SHA3-512 total difficulty of all block signers, signing the last block.</span>
                             </div>
                         </div>
                     </div>
@@ -108,19 +91,36 @@
                         <img class="theme-dependent" data-icon="charger.svg" alt="charger" />
                     </div>
                 </div>
+                
                 <div class="ixiCard">
                     <div class="flexCGap8">
-                        <p class="heading-sm"><?php echo $this->miningreward;?></p>
+                        <p class="heading-sm"><?php echo $this->hashrate;?></p>
                         <div class="tooltipWrapperHelper">
-                            <p class="label-sm t-gray">Block Mining Reward</p>
+                            <p class="label-sm t-gray">Required Block Signer Difficulty</p>
                             <div class="tooltip-container">
                                 <i class="fa fa-question-circle"></i>
-                                <span class="myTooltip">The block mining reward is split between miners that participated in PoW required for the block.</span>
+                                <span class="myTooltip">Minimum combined SHA3-512 total difficulty of all block signers, required to sign the next block.</span>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <img class="theme-dependent" data-icon="ixian_logo.svg" alt="ixi" />
+                        <img class="theme-dependent" data-icon="charger.svg" alt="charger" />
+                    </div>
+                </div>
+                
+                <div class="ixiCard">
+                    <div class="flexCGap8">
+                        <p class="heading-sm"><?php echo $this->hashrate;?></p>
+                        <div class="tooltipWrapperHelper">
+                            <p class="label-sm t-gray">Estimated Hash-rate (h/s)</p>
+                            <div class="tooltip-container">
+                                <i class="fa fa-question-circle"></i>
+                                <span class="myTooltip">Combined estimated total SHA3-512 hash rate of all block signers, signing the last block.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img class="theme-dependent" data-icon="charger.svg" alt="charger" />
                     </div>
                 </div>
             </div>
@@ -152,19 +152,6 @@
                 <div>
                     <div class="chart-area">
                         <canvas id="chart-2"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="blockStatusCard">
-                <div class="blockStatusCardHeader">
-                    <div>
-                        <h3 class="heading-sm">Mining Status</h3>
-                        <p class="body-md">Showing data for last <span class="t-blue label-sm"><?php echo $this->numblocks;?></span> blocks.</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="chart-area">
-                        <canvas id="chart-0"></canvas>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
     <div class="pageLimitWrapper nodesHero">
         <div>
             <h1 class="heading-lg">Ixian Nodes</h1>
-            <p class="body-md">Explore the stats of IXI nodes and connected clients.</p>
+            <p class="body-md">Explore the stats of IXI nodes.</p>
         </div>
         <div class="cardGroup nodesSpecificGrid">
             <div class="ixiCard">
