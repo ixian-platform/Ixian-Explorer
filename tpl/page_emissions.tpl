@@ -24,11 +24,11 @@
                         <p class="label-md">IXI emission model for Argon2 mining rewards:</p>
                             <ul>
                                 <li>
-                                    Mining reward starts with 10 IXI and increases by 0.009 IXI with every block until block height #1051200.
+                                    Argon2 mining reward starts with 10 IXI and increases by 0.009 IXI with every block until block height #1051200.
                                     Last block reward in this period is 4740 IXI.
                                 </li>
-                                <li>Mining reward is set to 4740 IXI per block until block height #1802000.</li>
-                                <li>Mining reward is set to 2304 IXI per block until block height #6307200.</li>
+                                <li>Argon2 mining reward is set to 4740 IXI per block until block height #1802000.</li>
+                                <li>Argon2 mining reward is set to 2304 IXI per block until block height #6307200.</li>
                             </ul>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="blockStatusCardHeader">
                     <div>
                         <h3 class="heading-sm">Projected Total IXI in Circulation at Each Block Height</h3>
-                        <p class="body-md" style="max-width: 640px"> Data below shows the projected total IXI in circulation at each block height. One block represents approximately 30 seconds. The supply increases according to the mining and signing rewards.</p>
+                        <p class="body-md" style="max-width: 640px"> Data below shows the projected total IXI in circulation at each block height. One block represents approximately 30 seconds. The supply increases according to the Argon2 mining and PoCW signing rewards.</p>
                     </div>
                 </div>
                 <div class="blockStatusCardBottomSection">
@@ -284,7 +284,7 @@ var myLineChart1 = new Chart(ctx1, {
         type: 'bar',
         label: "Today",
         data: [
-          { x: closestBlockSigningLabel, y: 600 }
+          { x: closestBlockSigningLabel, y: 900 }
         ],
         maxBarThickness: 3,
         borderColor: "#F09A1D",

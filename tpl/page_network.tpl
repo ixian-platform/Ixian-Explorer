@@ -78,7 +78,7 @@
                 
                 <div class="ixiCard">
                     <div class="flexCGap8">
-                        <p class="heading-sm"><?php echo $this->hashrate;?></p>
+                        <p class="heading-sm"><?php echo $this->lastTotalSigDiff;?></p>
                         <div class="tooltipWrapperHelper">
                             <p class="label-sm t-gray">Last Block Signer Difficulty</p>
                             <div class="tooltip-container">
@@ -94,7 +94,7 @@
                 
                 <div class="ixiCard">
                     <div class="flexCGap8">
-                        <p class="heading-sm"><?php echo $this->hashrate;?></p>
+                        <p class="heading-sm"><?php echo $this->lastReqSigDiff;?></p>
                         <div class="tooltipWrapperHelper">
                             <p class="label-sm t-gray">Required Block Signer Difficulty</p>
                             <div class="tooltip-container">

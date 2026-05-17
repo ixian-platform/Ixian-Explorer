@@ -74,10 +74,14 @@ $page->reqsigdiff = $reqsigdiff;
 
 $signers = 0;
 $requiredsigners = 0;
+$lastTotalSigDiff = 0;
+$lastReqSigDiff = 0;
 $data = db_fetch("SELECT * FROM ixi_blocks ORDER BY id DESC LIMIT 1", [ ]);
 if ($data != 0) {
     $signers = $data[0]["sigCount"];
     $requiredsigners = $data[0]["sigRequired"];
+    $lastTotalSigDiff = $data[0]["totalSignerDifficulty"];
+    $lastReqSigDiff = $data[0]["requiredSignerDifficulty"];
 }
 
 $laststat = db_fetch("SELECT * FROM ixi_nodestats ORDER BY blockheight DESC LIMIT 1", [])[0];
@@ -87,7 +91,9 @@ if ($laststat != 0) {
 
 $page->bh = $laststat['blockheight'];
 $page->blockratio = $laststat['blockratio'];
-$page->hashrate = number_format($totalsigdiff / $blockPowCalculationTime);
+$page->lastTotalSigDiff = number_format($lastTotalSigDiff);
+$page->lastReqSigDiff = number_format($lastReqSigDiff);
+$page->hashrate = number_format($lastTotalSigDiff / $blockPowCalculationTime);
 
 $page->m = $laststat['nodes-m'];
 $page->r = $laststat['nodes-r'];

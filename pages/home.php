@@ -8,6 +8,8 @@ $current_page = "home";
 
 $page = new Template();
 
+$blockPowCalculationTime = 900; // 900 seconds (30 blocks)
+
 $page->cpage = $current_page;
 
 $page->q = "";
@@ -23,8 +25,13 @@ $bh = $laststat['blockheight'];
 
 $page->supply = number_format($laststat['totalixi']);
 $page->m = $laststat['nodes-m'];
-$page->hashrate = number_format($laststat['hashrate']);
 
+$lastTotalSigDiff = 0;
+$data = db_fetch("SELECT * FROM ixi_blocks ORDER BY id DESC LIMIT 1", [ ]);
+if ($data != 0) {
+    $lastTotalSigDiff = $data[0]["totalSignerDifficulty"];
+}
+$page->hashrate = number_format($lastTotalSigDiff / $blockPowCalculationTime);
 
 $page->txtotal = 0;
 $page->tx24 = 0;
