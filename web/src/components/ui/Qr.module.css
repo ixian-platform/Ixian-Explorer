@@ -1,0 +1,30 @@
+.wrap {
+  position: relative;
+}
+.pop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 30;
+  padding: 12px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-md);
+  background: var(--ix-surface);
+  box-shadow: 0 24px 60px -20px var(--ix-shadow);
+}
+.svg {
+  display: block;
+  border-radius: var(--ix-r-xs);
+}
+.note {
+  max-width: 200px;
+  margin-top: 8px;
+  color: var(--ix-text-3);
+  font-size: 12px;
+}
+@media (max-width: 640px) {
+  .pop {
+    right: auto;
+    left: 0;
+  }
+}

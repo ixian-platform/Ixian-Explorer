@@ -1,0 +1,40 @@
+/* A hairline strip under the header: no card, no icon badge. The warning dot carries the state. */
+.strip {
+  border-bottom: 1px solid var(--ix-line);
+  background: linear-gradient(to right, color-mix(in srgb, var(--ix-warning) 7%, transparent), transparent 60%);
+}
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.lead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin: 0;
+}
+.lead b {
+  font-weight: var(--ix-fw-ui);
+  color: var(--ix-text);
+}
+.lead :global(.ix-status) {
+  align-self: center;
+}
+.figs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  color: var(--ix-text-2);
+}
+.muted {
+  color: var(--ix-text-3);
+}

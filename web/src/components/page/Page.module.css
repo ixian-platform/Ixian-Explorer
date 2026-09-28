@@ -1,0 +1,459 @@
+.page {
+  padding-top: clamp(28px, 4vw, 56px);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px 32px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--ix-line);
+}
+.headMain {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 420px;
+}
+.eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  color: var(--ix-text-3);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.eyebrow > * {
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+.title {
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.titleMono {
+  font-family: var(--ix-mono);
+  font-size: clamp(1rem, 0.8rem + 0.9vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  word-break: break-all;
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 18px;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-small);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.section {
+  padding-top: clamp(40px, 5vw, 64px);
+}
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+}
+.h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.lead {
+  max-width: 64ch;
+  margin-top: 6px;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-small);
+}
+.aside {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+/* figures */
+.figs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid var(--ix-line-2);
+  border-left: 1px solid var(--ix-line);
+}
+@media (min-width: 900px) {
+  .figs[data-cols='3'] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .figs[data-cols='4'] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .figs[data-cols='5'] {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+.fig {
+  display: grid;
+  align-content: start;
+  gap: 5px;
+  min-width: 0;
+  padding: 16px 16px 18px;
+  border-right: 1px solid var(--ix-line);
+  border-bottom: 1px solid var(--ix-line);
+}
+.figK {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--ix-text-3);
+  font-size: 12px;
+  font-weight: 500;
+}
+.figV {
+  margin: 0;
+  min-width: 0;
+  font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.figSub {
+  margin: 0;
+  color: var(--ix-text-2);
+  font-size: 12.5px;
+}
+
+/* raw details */
+.raw {
+  margin-top: clamp(40px, 5vw, 56px);
+  border-top: 1px solid var(--ix-line-2);
+}
+.rawSum {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.rawSum::-webkit-details-marker {
+  display: none;
+}
+.rawChev {
+  color: var(--ix-text-2);
+  transition: transform var(--ix-dur-2) var(--ix-ease-out);
+}
+.raw[open] .rawChev {
+  transform: rotate(180deg);
+}
+.rawBody {
+  padding-bottom: 8px;
+}
+
+/* tables shared by detail and list pages */
+.tableWrap {
+  overflow-x: auto;
+  margin-inline: calc(-1 * var(--ix-gutter));
+  padding-inline: var(--ix-gutter);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+.table th {
+  padding: 10px 12px 10px 0;
+  border-bottom: 1px solid var(--ix-line-2);
+  color: var(--ix-text-3);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+}
+.table td {
+  padding: 12px 12px 12px 0;
+  border-bottom: 1px solid var(--ix-line);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.table tbody tr {
+  transition: background-color var(--ix-dur-1);
+}
+.table tbody tr:hover {
+  background: rgb(var(--ix-fg-rgb) / 0.025);
+}
+.table .num,
+.table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.table td:last-child,
+.table th:last-child {
+  padding-right: 0;
+}
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: inherit;
+  font: inherit;
+}
+.sortBtn:hover {
+  color: var(--ix-text);
+}
+.sortBtn[data-active] {
+  color: var(--ix-text);
+}
+.rowLink {
+  font-weight: 560;
+}
+.rowLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--ix-line-strong);
+}
+.muted {
+  color: var(--ix-text-3);
+}
+.in {
+  color: var(--ix-text);
+}
+.out {
+  color: var(--ix-text-2);
+}
+
+/* meter (signatures) */
+.meter {
+  position: relative;
+  height: 4px;
+  margin-top: 8px;
+  border-radius: 2px;
+  background: var(--ix-surface-2);
+}
+.meterFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+  background: var(--ix-m-signers);
+}
+.meterMark {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--ix-text-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 9px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-xs);
+  color: var(--ix-text-2);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.chipDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ix-text-2);
+}
+.chip[data-tone='done'] .chipDot {
+  background: var(--ix-text);
+}
+
+.navBtns {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.kbdHint {
+  color: var(--ix-text-3);
+  font-size: 12px;
+  display: none;
+}
+@media (min-width: 900px) and (hover: hover) {
+  .kbdHint {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.code {
+  display: block;
+  max-height: 360px;
+  overflow: auto;
+  padding: 14px;
+  border: 1px solid var(--ix-line);
+  border-radius: var(--ix-r-xs);
+  background: var(--ix-surface);
+  font-family: var(--ix-mono);
+  font-size: 12px;
+  line-height: 1.55;
+  white-space: pre;
+  color: var(--ix-text-2);
+}
+
+/* ------------------------------------------------------------------------
+   Tables as two-line rows on phones: no sideways scroll.
+   A table opts in with data-cards; its cells say where they go:
+     data-a="t1"  first line, left (the identity: height, txid, node)
+     data-a="t2"  first line, right (age, amount, change)
+     data-a="sub" second line, small and muted; data-l adds a unit after it,
+                  data-p a word before it; data-last puts it at the end
+   Cells without data-a are hidden. The link marked data-row covers the whole
+   row, so the row is one tap target; other links stay tappable above it.
+   Sortable tables keep their sort buttons as a row above the list.
+   ------------------------------------------------------------------------ */
+@media (max-width: 640px) {
+  .tableWrap:has(> .table[data-cards]) {
+    overflow-x: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+  .table[data-cards],
+  .table[data-cards] tbody {
+    display: block;
+  }
+  .table[data-cards] thead {
+    display: block;
+  }
+  .table[data-cards] thead tr {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ix-line-2);
+  }
+  .table[data-cards] thead th {
+    padding: 4px 0;
+    border: 0;
+  }
+  .table[data-cards] thead th:not(:has(button)) {
+    display: none;
+  }
+  .table[data-cards] thead tr:not(:has(button)) {
+    display: none;
+  }
+  .table[data-cards] tbody tr {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 5px 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--ix-line);
+  }
+  .table[data-cards] tbody tr::after {
+    content: '';
+    order: 3;
+    flex-basis: 100%;
+    height: 0;
+  }
+  .table[data-cards] td {
+    display: none;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+    text-align: left;
+  }
+  .table[data-cards] td[data-a] {
+    display: block;
+  }
+  .table[data-cards] td[data-a='t1'] {
+    order: 1;
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14.5px;
+  }
+  .table[data-cards] td[data-a='t2'] {
+    order: 2;
+    flex: none;
+    text-align: right;
+  }
+  .table[data-cards] td[data-a='sub'] {
+    order: 4;
+    font-size: 12.5px;
+    color: var(--ix-text-2);
+  }
+  .table[data-cards] td[data-a='sub'][data-last] {
+    order: 9;
+  }
+  .table[data-cards] td[data-l]::after {
+    content: ' ' attr(data-l);
+    color: var(--ix-text-3);
+  }
+  .table[data-cards] td[data-p]::before {
+    content: attr(data-p) ' ';
+    color: var(--ix-text-3);
+  }
+
+  /* skeleton rows (no data-a yet): show two placeholders */
+  .table[data-cards] tbody tr:not(:has(td[data-a])) td:nth-child(-n + 2) {
+    display: block;
+  }
+}
+
+/* long amounts in a figure wrap instead of running into the next cell */
+.figV :global(.ix-num),
+.figSub :global(.ix-num) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* the row's main link covers the whole row at every width, so a row is one click target;
+   other links in it (addresses, a block) stay clickable above it */
+.table[data-cards] tbody tr {
+  position: relative;
+}
+.table[data-cards] tbody tr:has(a[data-row]) {
+  cursor: pointer;
+}
+.table[data-cards] a[data-row]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.table[data-cards] a:not([data-row]),
+.table[data-cards] button {
+  position: relative;
+  z-index: 1;
+}

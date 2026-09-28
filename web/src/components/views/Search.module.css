@@ -1,0 +1,54 @@
+.wrap {
+  max-width: 760px;
+}
+.eyebrow {
+  margin-bottom: 14px;
+  color: var(--ix-text-3);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.box {
+  margin-bottom: 20px;
+}
+.resolving {
+  display: grid;
+  gap: 10px;
+  padding: 32px 0;
+}
+.help {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--ix-line);
+}
+.helpTitle {
+  margin-bottom: 14px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.kinds {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+.kinds > div {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 12px;
+}
+.kinds dt {
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-small);
+}
+.kinds dd {
+  margin: 0;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-small);
+}
+@media (max-width: 560px) {
+  .kinds > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
