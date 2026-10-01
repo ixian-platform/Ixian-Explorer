@@ -148,7 +148,7 @@ export default function TxView() {
             Transaction {tx && <TypeChip type={tx.type} />} <DemoTag />
           </>
         }
-        title={tx ? <Amount value={tx.amount} trim /> : <Skel w={280} h={44} />}
+        title={tx ? <Amount value={tx.amount} trim /> : <Skel w={280} h="1.02em" />}
         meta={
           tx ? (
             <>
@@ -162,7 +162,10 @@ export default function TxView() {
               </span>
             </>
           ) : (
-            <Skel w={320} h={16} />
+            <>
+              <Skel w={237} h={22} />
+              <Skel w={229} h={22} />
+            </>
           )
         }
       >
@@ -171,7 +174,7 @@ export default function TxView() {
         </div>
       </PageHead>
 
-      <Section title="Where the IXI went" lead={tx ? TX_TYPE_LONG[tx.type] : undefined}>
+      <Section title="Where the IXI went" lead={tx ? TX_TYPE_LONG[tx.type] : <Skel w={200} h={22} />}>
         {tx ? <Flow tx={tx} /> : <Skel h={120} />}
       </Section>
 
@@ -235,9 +238,11 @@ export default function TxView() {
           />
         </Raw>
       )}
-      <p className={s.back}>
-        <Icon name="back" size={14} /> <Link href="/blocks">All blocks</Link>
-      </p>
+      {tx && (
+        <p className={s.back}>
+          <Icon name="back" size={14} /> <Link href="/blocks">All blocks</Link>
+        </p>
+      )}
     </div>
   );
 }

@@ -83,6 +83,8 @@
   --ix-fs-body: 1rem; /* 16 */
   --ix-fs-small: 0.875rem; /* 14 */
   --ix-fs-label: 0.78125rem; /* 12.5 */
+  --ix-fs-tiny: 0.75rem; /* 12 */
+  --ix-fs-micro: 0.6875rem; /* 11: the smallest text */
   --ix-fs-mono: 0.78125rem;
 
   --ix-fw-head: 600;
@@ -119,6 +121,15 @@
   --ix-r-xs: 2px;
   --ix-r-sm: 4px;
   --ix-r-md: 6px;
+
+  /* ---- Layers ------------------------------------------------------ */
+  --ix-z-sticky: 20;
+  --ix-z-popover: 30;
+  --ix-z-dropdown: 40;
+  --ix-z-nav: 50;
+  --ix-z-overlay: 60;
+  --ix-z-modal: 90;
+  --ix-z-skip: 100;
 
   /* ---- Motion ------------------------------------------------------- */
   --ix-ease-out: cubic-bezier(0.16, 1, 0.3, 1);

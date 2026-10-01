@@ -1,7 +1,7 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: var(--ix-z-nav);
   border-bottom: 1px solid transparent;
   background: rgb(var(--ix-bg-rgb) / 0.6);
   backdrop-filter: saturate(150%) blur(16px);
@@ -43,7 +43,7 @@
   height: 25px;
 }
 .word {
-  font-size: 18px;
+  font-size: var(--ix-fs-lead);
   font-weight: 600;
   letter-spacing: -0.03em;
   color: var(--ix-text);
@@ -59,7 +59,7 @@
   padding: 8px 12px;
   border-radius: var(--ix-r-sm);
   color: var(--ix-text-2);
-  font-size: 14px;
+  font-size: var(--ix-fs-small);
   font-weight: 480;
   transition: color var(--ix-dur-1), background-color var(--ix-dur-1);
 }
@@ -97,7 +97,7 @@
   border-radius: var(--ix-r-sm);
   background: rgb(var(--ix-fg-rgb) / 0.02);
   color: var(--ix-text-3);
-  font-size: 13.5px;
+  font-size: var(--ix-fs-small);
   transition: border-color var(--ix-dur-1), color var(--ix-dur-1);
 }
 .search:hover {

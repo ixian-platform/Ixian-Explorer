@@ -23,7 +23,7 @@
   align-items: center;
   gap: 8px 12px;
   color: var(--ix-text-3);
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -125,7 +125,7 @@
   align-items: center;
   gap: 6px;
   color: var(--ix-text-3);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
   font-weight: 500;
 }
 .figV {
@@ -140,7 +140,7 @@
 .figSub {
   margin: 0;
   color: var(--ix-text-2);
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
 }
 
 /* raw details */
@@ -183,13 +183,13 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13.5px;
+  font-size: var(--ix-fs-small);
 }
 .table th {
   padding: 10px 12px 10px 0;
   border-bottom: 1px solid var(--ix-line-2);
   color: var(--ix-text-3);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
   font-weight: 500;
   text-align: left;
   white-space: nowrap;
@@ -251,13 +251,13 @@
   position: relative;
   height: 4px;
   margin-top: 8px;
-  border-radius: 2px;
+  border-radius: var(--ix-r-xs);
   background: var(--ix-surface-2);
 }
 .meterFill {
   position: absolute;
   inset: 0 auto 0 0;
-  border-radius: 2px;
+  border-radius: var(--ix-r-xs);
   background: var(--ix-m-signers);
 }
 .meterMark {
@@ -277,7 +277,7 @@
   border: 1px solid var(--ix-line-2);
   border-radius: var(--ix-r-xs);
   color: var(--ix-text-2);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -298,7 +298,7 @@
 }
 .kbdHint {
   color: var(--ix-text-3);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
   display: none;
 }
 @media (min-width: 900px) and (hover: hover) {
@@ -325,7 +325,7 @@
   border-radius: var(--ix-r-xs);
   background: var(--ix-surface);
   font-family: var(--ix-mono);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
   line-height: 1.55;
   white-space: pre;
   color: var(--ix-text-2);
@@ -411,7 +411,7 @@
   }
   .table[data-cards] td[data-a='sub'] {
     order: 4;
-    font-size: 12.5px;
+    font-size: var(--ix-fs-label);
     color: var(--ix-text-2);
   }
   .table[data-cards] td[data-a='sub'][data-last] {
@@ -456,4 +456,9 @@
 .table[data-cards] button {
   position: relative;
   z-index: 1;
+}
+
+/* on phones a status chip gets its own line, loaded or not, so the header keeps its height when it arrives */
+@media (max-width: 640px) {
+  .meta:has(> .chip, > .chipSkel) { flex-direction: column; align-items: flex-start; }
 }

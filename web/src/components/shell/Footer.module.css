@@ -31,7 +31,7 @@
   border: 1px solid var(--ix-line-2);
   border-radius: var(--ix-r-sm);
   color: var(--ix-text-2);
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
   line-height: 1.5;
 }
 .demo svg {
@@ -46,7 +46,7 @@
 .colTitle {
   margin-bottom: 12px;
   color: var(--ix-text-3);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -78,7 +78,7 @@
   padding-bottom: 28px;
   border-top: 1px solid var(--ix-line);
   color: var(--ix-text-3);
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
 }
 .kbd {
   display: inline-flex;

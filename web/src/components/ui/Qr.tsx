@@ -39,8 +39,8 @@ export default function QrButton({ value }: { value: string }) {
       {open && path && (
         <div id={id} className={s.pop} role="dialog" aria-label="QR code of this address">
           <svg viewBox={`-2 -2 ${path.n + 4} ${path.n + 4}`} width="200" height="200" className={s.svg} role="img" aria-label={`QR code for ${value}`}>
-            <rect x="-2" y="-2" width={path.n + 4} height={path.n + 4} fill="#f3f7f4" />
-            <path d={path.d} fill="#0a0f0c" shapeRendering="crispEdges" />
+            <rect x="-2" y="-2" width={path.n + 4} height={path.n + 4} fill="var(--ix-grey-100)" />
+            <path d={path.d} fill="var(--ix-grey-1000)" shapeRendering="crispEdges" />
           </svg>
           <p className={s.note}>Scan with an Ixian wallet such as Spixi.</p>
         </div>

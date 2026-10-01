@@ -124,7 +124,7 @@ export default function BlockView() {
             Block <DemoTag />
           </>
         }
-        title={id != null ? `#${int(id)}` : <Skel w={260} h={44} />}
+        title={id != null ? `#${int(id)}` : <Skel w={260} h="1.02em" />}
         meta={
           b ? (
             <>
@@ -135,7 +135,10 @@ export default function BlockView() {
               </span>
             </>
           ) : (
-            <Skel w={320} h={16} />
+            <>
+              <Skel w={200} h={16} />
+              <Skel w={230} h={24} className={p.chipSkel} />
+            </>
           )
         }
         actions={
@@ -172,7 +175,7 @@ export default function BlockView() {
             mark="tx"
             k="Transactions"
             v={b ? int(b.txCount) : <Skel w={80} h={24} />}
-            sub={b ? <Amount value={b.txAmount} decimals={2} /> : null}
+            sub={b ? <Amount value={b.txAmount} decimals={2} /> : <Skel w={70} h={13} />}
           />
           <Fig
             mark="signers"
@@ -184,7 +187,9 @@ export default function BlockView() {
                   <span className={p.meterFill} style={{ width: `${Math.min(100, (b.sigCount / Math.max(b.sigCount, b.sigRequired * 1.4)) * 100)}%` }} />
                   <span className={p.meterMark} style={{ left: `${Math.min(100, (b.sigRequired / Math.max(b.sigCount, b.sigRequired * 1.4)) * 100)}%` }} />
                 </span>
-              ) : null
+              ) : (
+                <Skel w="100%" h={6} />
+              )
             }
           />
           <Fig mark="time" k="Block time" v={b ? `${b.blocktime} s` : <Skel w={60} h={24} />} sub="since the previous block · target 30 s" />

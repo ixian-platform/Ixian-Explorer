@@ -76,7 +76,7 @@ body {
   position: fixed;
   top: 12px;
   left: 12px;
-  z-index: 100;
+  z-index: var(--ix-z-skip);
   padding: 10px 16px;
   border-radius: var(--ix-r-sm);
   background: var(--ix-action);
@@ -166,7 +166,7 @@ kbd,
   border-radius: var(--ix-r-xs);
   color: var(--ix-text-2);
   font-family: var(--ix-font);
-  font-size: 11px;
+  font-size: var(--ix-fs-micro);
   font-weight: 500;
   line-height: 1;
 }
@@ -212,7 +212,7 @@ kbd,
   flex: none;
   width: 10px;
   height: 3px;
-  border-radius: 2px;
+  border-radius: var(--ix-r-xs);
   background: var(--ix-ink-3);
   vertical-align: middle;
 }
@@ -237,3 +237,8 @@ kbd,
 .ix-status[data-s='good'] { background: var(--ix-good); }
 .ix-status[data-s='warning'] { background: var(--ix-warning); }
 .ix-status[data-s='critical'] { background: var(--ix-critical); }
+
+/* the footer starts below the fold, so it doesn't jump down when a page's data arrives */
+#main {
+  min-height: calc(100svh - var(--ix-nav-h));
+}

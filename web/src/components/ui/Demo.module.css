@@ -36,7 +36,7 @@
   position: absolute;
   right: 0;
   top: calc(100% + 8px);
-  z-index: 60;
+  z-index: var(--ix-z-overlay);
   width: min(320px, calc(100vw - 32px));
   padding: 16px 16px 14px;
   border: 1px solid var(--ix-line-2);
@@ -54,7 +54,7 @@
 }
 .popBody {
   color: var(--ix-text-2);
-  font-size: 13px;
+  font-size: var(--ix-fs-label);
   line-height: 1.5;
 }
 .popBody + .popBody {
@@ -103,7 +103,7 @@
   border: 1px solid var(--ix-line-2);
   border-radius: var(--ix-r-xs);
   color: var(--ix-text-2);
-  font-size: 11px;
+  font-size: var(--ix-fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   white-space: nowrap;

@@ -5,7 +5,7 @@
   position: absolute;
   right: 0;
   top: calc(100% + 8px);
-  z-index: 30;
+  z-index: var(--ix-z-popover);
   padding: 12px;
   border: 1px solid var(--ix-line-2);
   border-radius: var(--ix-r-md);
@@ -20,7 +20,7 @@
   max-width: 200px;
   margin-top: 8px;
   color: var(--ix-text-3);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
 }
 @media (max-width: 640px) {
   .pop {

@@ -21,7 +21,7 @@
 }
 .sub {
   color: var(--ix-text-3);
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
   line-height: 1.45;
 }
 .tableBtn {
@@ -51,16 +51,16 @@
 }
 .tick {
   fill: var(--ix-text-3);
-  font-size: 11px;
+  font-size: var(--ix-fs-micro);
   font-variant-numeric: tabular-nums;
 }
 .refLabel {
   fill: var(--ix-text-2);
-  font-size: 11px;
+  font-size: var(--ix-fs-micro);
 }
 .markLabel {
   fill: var(--ix-text);
-  font-size: 11.5px;
+  font-size: var(--ix-fs-micro);
   font-weight: 500;
 }
 .skel {
@@ -88,13 +88,13 @@
   pointer-events: none;
 }
 .tipV {
-  font-size: 14px;
+  font-size: var(--ix-fs-small);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 .tipK {
   color: var(--ix-text-3);
-  font-size: 11.5px;
+  font-size: var(--ix-fs-micro);
 }
 
 .tableWrap {
@@ -104,7 +104,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: var(--ix-fs-label);
 }
 .table th,
 .table td {
@@ -123,7 +123,7 @@
   background: var(--ix-surface);
   color: var(--ix-text-3);
   font-weight: 500;
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
 }
 .table tr[data-mark] td {
   background: rgb(var(--ix-fg-rgb) / 0.05);
@@ -132,7 +132,7 @@
 .footer {
   margin-top: 10px;
   color: var(--ix-text-3);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
 }
 
 .tipSw {
@@ -140,7 +140,7 @@
   width: 8px;
   height: 8px;
   margin-right: 7px;
-  border-radius: 2px;
+  border-radius: var(--ix-r-xs);
   vertical-align: 1px;
 }
 /* live end of a series: a soft ping in the live colour */
@@ -178,7 +178,7 @@
   padding: 4px 6px;
   border-radius: var(--ix-r-xs);
   color: var(--ix-text-2);
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
   transition: background-color var(--ix-dur-1), opacity var(--ix-dur-1);
 }
 .legendBtn:hover {
@@ -203,12 +203,12 @@
 }
 .legendRange {
   color: var(--ix-text-3);
-  font-size: 11.5px;
+  font-size: var(--ix-fs-micro);
   font-variant-numeric: tabular-nums;
 }
 .laneLabel {
   fill: var(--ix-text-3);
-  font-size: 11px;
+  font-size: var(--ix-fs-micro);
   font-weight: 500;
   dominant-baseline: hanging;
 }
@@ -221,7 +221,7 @@
   align-items: center;
   gap: 0;
   margin-top: 3px;
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
 }
 .tipL {
   color: var(--ix-text-2);
@@ -249,5 +249,5 @@
   padding-top: 6px;
   border-top: 1px solid var(--ix-line);
   color: var(--ix-text-3);
-  font-size: 11.5px;
+  font-size: var(--ix-fs-micro);
 }

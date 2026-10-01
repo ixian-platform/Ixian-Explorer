@@ -134,7 +134,7 @@ export default function BlocksView() {
     }
     return (
       <nav className={s.pager} data-where={where} aria-label={where === 'top' ? 'Block pages' : 'Block pages, bottom'}>
-        <span className={p.muted}>{label}</span>
+        <span className={p.muted}>{label || (!rows && <Skel w={200} h={16} />)}</span>
         <div className={s.pagerBtns}>{buttons}</div>
       </nav>
     );
@@ -191,7 +191,7 @@ export default function BlocksView() {
 
       {win && <WindowBar win={win} slow={slow} canSort={canSort} onSort={(v) => setParams({ sort: v ? 'slow' : null, page: null, before: null })} onClear={() => setParams({ from: null, to: null, sort: null, page: null, before: null })} />}
 
-      {rows && rows.length > 0 && pager('top')}
+      {(!rows || rows.length > 0) && pager('top')}
 
       {(slow ? slowList : list).status === 'error' && !base ? (
         <StateBox kind="error" title="Blocks could not be loaded" action={<RetryButton onClick={(slow ? slowList : list).reload} />} />

@@ -198,7 +198,7 @@ export function TypeChip({ type }: { type: TxType }) {
 
 /* ---------------------------------------------------------------- states */
 
-export function Skel({ w = '100%', h = 14, className }: { w?: number | string; h?: number; className?: string }) {
+export function Skel({ w = '100%', h = 14, className }: { w?: number | string; h?: number | string; className?: string }) {
   return <span className={`ix-skel ${className ?? ''}`} style={{ width: w, height: h }} aria-hidden />;
 }
 
@@ -207,16 +207,19 @@ export function StateBox({
   title,
   children,
   action,
+  heading,
 }: {
   kind: 'empty' | 'error' | 'notfound';
   title: string;
+  /** render the title as the page's h1 (a page whose only content is this box) */
+  heading?: boolean;
   children?: ReactNode;
   action?: ReactNode;
 }) {
   return (
     <div className={s.state} data-kind={kind} role={kind === 'error' ? 'alert' : undefined}>
       <StateGlyph kind={kind} />
-      <p className={s.stateTitle}>{title}</p>
+      {heading ? <h1 className={s.stateTitle}>{title}</h1> : <p className={s.stateTitle}>{title}</p>}
       {children && <div className={s.stateBody}>{children}</div>}
       {action && <div className={s.stateAction}>{action}</div>}
     </div>

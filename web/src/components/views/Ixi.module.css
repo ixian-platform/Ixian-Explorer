@@ -18,12 +18,12 @@
 .sub {
   margin: 3px 0 12px;
   color: var(--ix-text-3);
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
 }
 .sched {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: var(--ix-fs-label);
 }
 .sched th,
 .sched td {
@@ -34,7 +34,7 @@
 }
 .sched th {
   color: var(--ix-text-3);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
   font-weight: 500;
   border-bottom-color: var(--ix-line-2);
 }
@@ -57,7 +57,7 @@
   border: 1px solid var(--ix-line-strong);
   border-radius: var(--ix-r-xs);
   color: var(--ix-text);
-  font-size: 11px;
+  font-size: var(--ix-fs-micro);
   font-weight: 500;
   line-height: 18px;
 }
@@ -68,7 +68,7 @@
 .distCap {
   margin-bottom: 10px;
   color: var(--ix-text-3);
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
 }
 .bar {
   display: flex;
@@ -78,7 +78,7 @@
 .seg {
   flex-basis: 0;
   min-width: 3px;
-  border-radius: 2px;
+  border-radius: var(--ix-r-xs);
 }
 .seg[data-tone='1'] {
   background: var(--ix-seq-1);
@@ -94,7 +94,7 @@
   flex-wrap: wrap;
   gap: 8px 24px;
   margin-top: 12px;
-  font-size: 13px;
+  font-size: var(--ix-fs-label);
 }
 .legend li {
   display: inline-flex;
@@ -105,7 +105,7 @@
 .sw {
   width: 10px;
   height: 10px;
-  border-radius: 2px;
+  border-radius: var(--ix-r-xs);
 }
 .sw[data-tone='1'] {
   background: var(--ix-seq-1);

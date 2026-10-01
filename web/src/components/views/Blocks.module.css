@@ -18,7 +18,7 @@
   border-radius: var(--ix-r-sm);
   background: transparent;
   color: var(--ix-text);
-  font-size: 13px;
+  font-size: var(--ix-fs-label);
   font-variant-numeric: tabular-nums;
 }
 .jumpInput::placeholder {
@@ -44,7 +44,7 @@
   justify-content: space-between;
   gap: 12px;
   padding-top: 16px;
-  font-size: 12.5px;
+  font-size: var(--ix-fs-label);
 }
 .pagerBtns {
   display: flex;
@@ -68,13 +68,13 @@
   display: inline-block;
   width: 36px;
   height: 4px;
-  border-radius: 2px;
+  border-radius: var(--ix-r-xs);
   background: var(--ix-surface-2);
 }
 .sigBar i {
   position: absolute;
   inset: 0 auto 0 0;
-  border-radius: 2px;
+  border-radius: var(--ix-r-xs);
   background: var(--ix-m-signers);
 }
 .sigBar b {
@@ -111,7 +111,7 @@
 }
 .windowK {
   color: var(--ix-text-3);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -120,7 +120,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2px 14px;
-  font-size: 14px;
+  font-size: var(--ix-fs-small);
 }
 .windowActions {
   display: flex;
@@ -139,6 +139,6 @@
   padding: 8px 0 !important;
   border-bottom: 1px dashed var(--ix-line-strong) !important;
   color: var(--ix-text-2);
-  font-size: 12px;
+  font-size: var(--ix-fs-tiny);
   letter-spacing: 0.02em;
 }

@@ -61,7 +61,9 @@ export function BlockTxTable({ items, rows = 10 }: { items: TxSummary[] | null; 
             <th scope="col">Transaction</th>
             <th scope="col">Type</th>
             <th scope="col">From</th>
-            <th scope="col" aria-label="to" />
+            <th scope="col">
+              <span className="ix-sr">Direction</span>
+            </th>
             <th scope="col">To</th>
             <th scope="col" className={p.num}>
               Amount

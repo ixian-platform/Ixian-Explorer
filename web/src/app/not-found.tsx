@@ -7,6 +7,7 @@ export default function NotFound() {
     <div className={`ix-container ${p.page}`}>
       <StateBox
         kind="notfound"
+        heading
         title="This page does not exist"
         action={
           <>

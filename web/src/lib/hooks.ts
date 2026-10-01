@@ -41,10 +41,14 @@ export function useQuery<T>(key: string | null, load: () => Promise<T | null>) {
   return { ...state, reload };
 }
 
+// true once the app has hydrated: later mounts can read the clock on their first render
+let hydrated = false;
+
 /** Unix seconds, ticking. null during server render and the first paint (hydration-safe). */
 export function useNow(intervalMs = 1000): number | null {
-  const [now, setNow] = useState<number | null>(null);
+  const [now, setNow] = useState<number | null>(() => (hydrated ? Date.now() / 1000 : null));
   useEffect(() => {
+    hydrated = true;
     setNow(Date.now() / 1000);
     const id = window.setInterval(() => setNow(Date.now() / 1000), intervalMs);
     return () => window.clearInterval(id);
