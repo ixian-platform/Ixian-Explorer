@@ -221,7 +221,7 @@ export default function StatsView() {
         </h2>
         <div className={s.grid2}>
           <Chart
-            title="IXI in circulation"
+            title="In circulation"
             subtitle={`At the end of each bucket; ${bucket}`}
             {...supply}
             color="var(--ix-m-ixi)"
@@ -229,7 +229,7 @@ export default function StatsView() {
             format={(v) => `${int(v)} IXI`}
             tick={(v) => compact(v, 3)}
             live
-            valueLabel="Supply (IXI)"
+            valueLabel="In circulation (IXI)"
           />
           <Chart
             title="New IXI"

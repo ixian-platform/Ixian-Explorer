@@ -8,10 +8,10 @@ import { source } from '@/data/source';
 import { useQuery } from '@/lib/hooks';
 import { checkAddress, baseAddress } from '@/lib/address';
 import { compact, int, dec } from '@/lib/format';
-import { links } from '@/lib/links';
 import { PageHead, Section, Figures, Fig } from '@/components/page/Page';
-import { Amount, CopyButton, Segmented, Skel, StateBox, RetryButton, Pager, DocLink } from '@/components/ui/Primitives';
+import { Amount, CopyButton, Segmented, Skel, StateBox, RetryButton, Pager } from '@/components/ui/Primitives';
 import { DemoTag } from '@/components/ui/Demo';
+import { AddressLost } from '@/components/lost/AddressLost';
 import QrButton from '@/components/ui/Qr';
 import Chart from '@/components/charts/Chart';
 import { AddressTxTable } from '@/components/tables/TxTable';
@@ -45,22 +45,11 @@ export default function AddressView() {
       </div>
     );
   }
-  if (check && !check.ok) {
-    return (
-      <div className={`ix-container ${p.page}`}>
-        <StateBox kind="notfound" title="This is not a valid Ixian address" action={<DocLink href={links.docs.addresses}>How addresses are built</DocLink>}>
-          <p className="ix-mono" style={{ wordBreak: 'break-all', color: 'var(--ix-text)' }}>
-            {addr}
-          </p>
-          <p style={{ marginTop: 8 }}>{check.reason}</p>
-        </StateBox>
-      </div>
-    );
-  }
+  if (check && !check.ok) return <AddressLost input={addr} reason={check.reason} />;
   if (info.status === 'error' && !info.data) {
     return (
       <div className={`ix-container ${p.page}`}>
-        <StateBox kind="error" title="This address could not be loaded" action={<RetryButton onClick={info.reload} />}>
+        <StateBox kind="error" title="This address could not be loaded." action={<RetryButton onClick={info.reload} />}>
           {info.error.message}
         </StateBox>
       </div>
@@ -95,7 +84,7 @@ export default function AddressView() {
 
       {unseen ? (
         <StateBox kind="empty" title="No activity yet">
-          The address is valid, but no transaction has touched it. Its balance is 0 IXI. It appears here after its first transaction.
+          The address is valid, but no transaction has touched it. Its balance is 0 IXI. Its history appears here after its first transaction.
         </StateBox>
       ) : (
         <>
@@ -158,7 +147,7 @@ export default function AddressView() {
             lead="Sort by time or by the size of the change. Amounts are what the transaction did to this balance."
           >
             {txs.status === 'error' ? (
-              <StateBox kind="error" title="Transactions could not be loaded" action={<RetryButton onClick={txs.reload} />} />
+              <StateBox kind="error" title="Transactions could not be loaded." action={<RetryButton onClick={txs.reload} />} />
             ) : tx && tx.total === 0 ? (
               <StateBox kind="empty" title="No transactions in the index yet" />
             ) : (

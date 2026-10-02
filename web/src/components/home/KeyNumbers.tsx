@@ -45,10 +45,10 @@ export default function KeyNumbers() {
       ),
       tick: true,
     },
-    { k: 'DLT nodes', m: 'dlt', v: data ? int(data.nodes_m) : null, sub: <Link href="/network" className={s.subLink}>Consensus and storage</Link> },
-    { k: 'S2 nodes', m: 's2', v: data ? int(data.nodes_r) : null, sub: <Link href="/network" className={s.subLink}>Streaming relays</Link> },
+    { k: 'DLT nodes', m: 'dlt', v: data ? int(data.nodes_m) : null, sub: <Link href="/network" className={s.subLink}>Sign blocks</Link> },
+    { k: 'S2 nodes', m: 's2', v: data ? int(data.nodes_r) : null, sub: <Link href="/network" className={s.subLink}>Relay traffic</Link> },
     {
-      k: 'Supply',
+      k: 'In circulation',
       m: 'ixi',
       v: data ? `${compact(Number(data.totalixi), 2)} IXI` : null,
       sub: data ? `+${compact(Number(data.signingReward) * BLOCKS_PER_DAY, 2)} IXI a day` : null,
@@ -60,10 +60,10 @@ export default function KeyNumbers() {
       v: data ? dec(data.tpsNow, 2) : null,
       sub: data ? (
         !data.tpsPeak.height ? (
-          isDemo() ? 'No record in demo data' : 'Peak not available yet'
+          isDemo() ? 'No record in demo data' : 'Record not available yet'
         ) : (
         <Link href={`/block?h=${data.tpsPeak.height}`} className={s.subLink}>
-          Peak {dec(data.tpsPeak.tps, 2)} · {shortDate(data.tpsPeak.timestamp)}
+          Record {dec(data.tpsPeak.tps, 2)} · {shortDate(data.tpsPeak.timestamp)}
         </Link>
         )
       ) : null,

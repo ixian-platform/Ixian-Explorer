@@ -45,12 +45,12 @@ export function DemoChip({ compact = false }: { compact?: boolean }) {
         <span className={compact ? s.short : undefined}>{compact ? 'Demo' : 'Demo data'}</span>
       </button>
       <div id={id} role="note" className={s.pop} hidden={!open}>
-        <p className={s.popTitle}>You are looking at demo data</p>
+        <p className={s.popTitle}>You are looking at demo data.</p>
         <p className={s.popBody}>
           ixiscope is not connected to the Ixian network yet. Every block, transaction, address and node here is generated
           from a fixed seed, so it behaves like the real thing but none of it is real.
         </p>
-        <p className={s.popBody}>Numbers marked with the demo tag switch to live values once ixiscope is connected to the explorer.</p>
+        <p className={s.popBody}>Numbers marked with the demo tag switch to live values once ixiscope is connected to the network.</p>
       </div>
     </div>
   );

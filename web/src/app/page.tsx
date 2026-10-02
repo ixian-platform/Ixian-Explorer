@@ -21,7 +21,7 @@ export default function Home() {
       <div className={`ix-container ${s.activity}`}>
         <div className={s.sectionHead}>
           <h2 className={s.h2}>Activity</h2>
-          <p className={s.lead}>Blocks arrive about every 30 seconds. Hover a list to pause it.</p>
+          <p className={s.lead}>Blocks arrive about every 30 seconds. Point at a list to pause it.</p>
         </div>
         <ActivityFigures />
         <div className={s.feeds}>

@@ -24,12 +24,6 @@ export interface SceneCity {
   s2: number;
 }
 
-/* Colours go to the shaders as raw sRGB (the shaders write them unconverted),
-   so each hex shows exactly as written. */
-const rgb = (hex: string) => {
-  const n = parseInt(hex.slice(1), 16);
-  return new THREE.Vector3(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
-};
 /** Globe colours, read from the --ix-globe-* and node tokens (see theme.css). */
 export interface GlobeColors {
   sphere: string;

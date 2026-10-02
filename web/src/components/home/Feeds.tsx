@@ -108,7 +108,7 @@ export function BlockFeed() {
         </button>
       )}
       {error ? (
-        <StateBox kind="error" title="Blocks could not be loaded" action={<RetryButton onClick={load} />} />
+        <StateBox kind="error" title="Blocks could not be loaded." action={<RetryButton onClick={load} />} />
       ) : (
         <ol className={s.rows} aria-live={st.paused ? 'off' : 'polite'} aria-relevant="additions">
           {st.items
@@ -187,7 +187,7 @@ export function TxFeed() {
         </button>
       )}
       {error ? (
-        <StateBox kind="error" title="Transactions could not be loaded" action={<RetryButton onClick={load} />} />
+        <StateBox kind="error" title="Transactions could not be loaded." action={<RetryButton onClick={load} />} />
       ) : st.items && st.items.length === 0 ? (
         <StateBox kind="empty" title="No transactions yet">
           New transactions appear here as blocks arrive.

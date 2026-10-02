@@ -58,7 +58,7 @@
 }
 .unit {
   color: var(--ix-text-2);
-  font-size: 0.86em;
+  font-size: max(11px, 0.86em);
   font-weight: 450;
 }
 .sign {
@@ -70,10 +70,13 @@
 .amount[data-flow='out'] {
   color: var(--ix-flow-out);
 }
-.amount[data-flow] .zeros,
-.amount[data-flow] .unit {
+.amount[data-flow='in'] .zeros,
+.amount[data-flow='in'] .unit {
   color: inherit;
-  opacity: 0.7;
+  opacity: 0.86;
+}
+.amount[data-flow='out'] .zeros {
+  color: var(--ix-text-3);
 }
 
 /* ---- time ---------------------------------------------------------------- */
@@ -258,48 +261,6 @@
     grid-template-columns: 1fr;
     gap: 4px;
   }
-}
-
-/* ---- frame with corner marks --------------------------------------------- */
-.frame {
-  position: relative;
-  border: 1px solid var(--ix-line);
-}
-.cornerTL,
-.cornerTR,
-.cornerBL,
-.cornerBR {
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  pointer-events: none;
-  border-color: var(--ix-ink-4);
-  border-style: solid;
-  border-width: 0;
-}
-.cornerTL {
-  top: -1px;
-  left: -1px;
-  border-top-width: 1px;
-  border-left-width: 1px;
-}
-.cornerTR {
-  top: -1px;
-  right: -1px;
-  border-top-width: 1px;
-  border-right-width: 1px;
-}
-.cornerBL {
-  bottom: -1px;
-  left: -1px;
-  border-bottom-width: 1px;
-  border-left-width: 1px;
-}
-.cornerBR {
-  bottom: -1px;
-  right: -1px;
-  border-bottom-width: 1px;
-  border-right-width: 1px;
 }
 
 /* ---- docs link ------------------------------------------------------------ */

@@ -54,12 +54,6 @@ body {
 .ix-num {
   font-variant-numeric: tabular-nums;
 }
-.ix-dim {
-  color: var(--ix-text-2);
-}
-.ix-muted {
-  color: var(--ix-text-3);
-}
 .ix-sr {
   position: absolute !important;
   width: 1px;
@@ -154,8 +148,7 @@ body {
   font-size: var(--ix-fs-label);
 }
 
-kbd,
-.ix-kbd {
+kbd {
   display: inline-grid;
   place-items: center;
   min-width: 20px;

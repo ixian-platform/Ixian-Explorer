@@ -72,20 +72,6 @@ export const requiredDifficulty = (h: number) => signerBaseline(h) * 0.0189;
 
 /* ------------------------------------------------------------- series */
 
-let peakCache: TpsPeak | null = null;
-/** The stress test's busiest block: the TPS record. */
-export function tpsRecord(): TpsPeak {
-  if (peakCache) return peakCache;
-  let best = { tps: 0, height: H_S0, timestamp: ts(H_S0) };
-  for (let h = H_S0; h < H_S1; h++) {
-    const bt = blocktime(h);
-    const tps = Math.round((blockTxs(h).total / bt) * 100) / 100;
-    if (tps > best.tps) best = { tps, height: h, timestamp: ts(h) };
-  }
-  peakCache = best;
-  return best;
-}
-
 const cache = new Map<string, Series>();
 
 export function mockSeries(metric: Metric, range: Range, nowSec: number): Series {

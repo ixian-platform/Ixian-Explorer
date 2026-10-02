@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Transaction, TxIO } from '@/data/types';
 import { source } from '@/data/source';
 import { useQuery, useStatus } from '@/lib/hooks';
@@ -12,6 +12,7 @@ import { knownLabel } from '@/data/knownWallets';
 import { PageHead, Section, Raw } from '@/components/page/Page';
 import { Amount, Hash, KV, Time, TypeChip, Skel, StateBox, RetryButton, DocLink, CopyButton } from '@/components/ui/Primitives';
 import { DemoTag } from '@/components/ui/Demo';
+import { TxLost, isPending } from '@/components/lost/TxLost';
 import Icon from '@/components/Icon';
 import p from '@/components/page/Page.module.css';
 import s from './Tx.module.css';
@@ -98,6 +99,22 @@ export default function TxView() {
   const id = (q.get('id') || '').trim();
   const { data: status } = useStatus();
   const t = useQuery(id || null, () => source.getTransaction(id));
+  // a transaction still waiting for its block: look again on every new block
+  const latest = status?.blockheight ?? null;
+  const waiting = t.status === 'notfound' && isPending(id, latest);
+  const reloadTx = t.reload;
+  const checkedAt = useRef<number | null>(null);
+  useEffect(() => {
+    checkedAt.current = null;
+  }, [id]);
+  useEffect(() => {
+    if (!waiting || latest == null) return;
+    if (checkedAt.current == null) checkedAt.current = latest;
+    else if (latest > checkedAt.current) {
+      checkedAt.current = latest;
+      reloadTx();
+    }
+  }, [waiting, latest, reloadTx]);
 
   if (!id) {
     return (
@@ -108,30 +125,11 @@ export default function TxView() {
       </div>
     );
   }
-  if (t.status === 'notfound') {
-    return (
-      <div className={`ix-container ${p.page}`}>
-        <StateBox
-          kind="notfound"
-          title="Transaction not found"
-          action={
-            <Link href="/blocks" className="ix-btn">
-              Browse blocks
-            </Link>
-          }
-        >
-          <p>
-            No transaction with the ID <span className="ix-mono">{middle(id, 16, 10)}</span>. It may still be waiting for a block, or the ID may be
-            mistyped.
-          </p>
-        </StateBox>
-      </div>
-    );
-  }
+  if (t.status === 'notfound' || (t.status === 'loading' && checkedAt.current != null)) return <TxLost id={id} />;
   if (t.status === 'error' && !t.data) {
     return (
       <div className={`ix-container ${p.page}`}>
-        <StateBox kind="error" title="This transaction could not be loaded" action={<RetryButton onClick={t.reload} />}>
+        <StateBox kind="error" title="This transaction could not be loaded." action={<RetryButton onClick={t.reload} />}>
           {t.error.message}
         </StateBox>
       </div>

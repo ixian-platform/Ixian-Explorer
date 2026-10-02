@@ -12,8 +12,6 @@ import { sha3_512, base58Decode } from './sha3';
 import { sha512 } from './sha512';
 import { KNOWN_WALLETS } from '@/data/knownWallets';
 
-export const B58 = /^[1-9A-HJ-NP-Za-km-z]+$/;
-
 export type AddressCheck =
   | { ok: true; version: 0 | 1 | 2; known: boolean }
   | { ok: false; reason: string };
@@ -41,6 +39,9 @@ export function checkAddress(input: string): AddressCheck {
   }
   const b = base58Decode(s);
   if (!b) return { ok: false, reason: 'Not valid Base58.' };
+  if (b.length !== 36 && b.length !== 48) {
+    return { ok: false, reason: `Ixian addresses are 36 or 48 bytes; this one decodes to ${b.length}. A character may be missing or extra.` };
+  }
   const v = b[0];
   if (v > 2) return { ok: false, reason: `This decodes to address version ${v}, and Ixian addresses are versions 0, 1 and 2. Check the first characters.` };
   const want = v === 0 ? 36 : 48;
@@ -116,4 +117,80 @@ export function classify(raw: string, latest?: number | null): QueryKind {
   const c = checkAddress(a);
   if (!c.ok) return { kind: 'invalid', reason: c.reason };
   return { kind: 'address', address: a, version: c.version };
+}
+
+const B58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+const toHex = (b: Uint8Array) => Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('');
+
+export interface AddressInspection {
+  /** the input without an extended-address suffix */
+  address: string;
+  /** positions of characters outside the Base58 alphabet */
+  badChars: number[];
+  /** decoded length in bytes, when the characters are valid */
+  bytes: number | null;
+  version: number | null;
+  /** the length this version needs */
+  want: number | null;
+  /** checksum in the address and the one its contents give, hex; set when the length is right */
+  given: string | null;
+  expected: string | null;
+  ok: boolean;
+}
+
+/** The same checks as checkAddress, kept apart so a page can show each one. */
+export function inspectAddress(input: string): AddressInspection {
+  const address = baseAddress(input);
+  const badChars = [...address].flatMap((c, i) => (B58.includes(c) ? [] : [i]));
+  const out: AddressInspection = { address, badChars, bytes: null, version: null, want: null, given: null, expected: null, ok: false };
+  if (!address || badChars.length) return out;
+  const b = base58Decode(address);
+  if (!b) return out;
+  out.bytes = b.length;
+  if (b.length !== 36 && b.length !== 48) return out;
+  out.version = b[0];
+  if (b[0] > 2) return out;
+  out.want = b[0] === 0 ? 36 : 48;
+  if (b.length !== out.want) return out;
+  out.given = toHex(b.slice(b.length - 3));
+  out.expected = toHex(addressChecksum(b.slice(0, b.length - 3)));
+  out.ok = out.given === out.expected;
+  return out;
+}
+
+const validQuick = (s: string) => {
+  const b = base58Decode(s);
+  if (!b || b[0] > 2 || b.length !== (b[0] === 0 ? 36 : 48)) return false;
+  const sum = addressChecksum(b.slice(0, b.length - 3));
+  return sum[0] === b[b.length - 3] && sum[1] === b[b.length - 2] && sum[2] === b[b.length - 1];
+};
+
+/**
+ * Valid addresses one edit away: a character changed, missing, extra, or two neighbours
+ * swapped. A three-byte checksum makes a chance match rare, so one result is a safe hint.
+ * Stops after `limit` hits. Runs in slices so the page stays responsive.
+ */
+export async function repairAddress(input: string, limit = 2): Promise<string[]> {
+  const a = baseAddress(input);
+  if (a.length < 40 || a.length > 70 || KNOWN_WALLETS[a]) return [];
+  const bad = [...a].flatMap((c, i) => (B58.includes(c) ? [] : [i]));
+  if (bad.length > 1) return [];
+  const found = new Set<string>();
+  const tryOne = (s: string) => {
+    if (s !== a && !found.has(s) && validQuick(s)) found.add(s);
+    return found.size >= limit;
+  };
+  const jobs: (() => boolean)[] = [];
+  const at = bad.length ? bad : [...a].map((_, i) => i);
+  for (const i of at) jobs.push(() => [...B58].some((c) => tryOne(a.slice(0, i) + c + a.slice(i + 1))));
+  for (const i of at) jobs.push(() => tryOne(a.slice(0, i) + a.slice(i + 1)));
+  if (!bad.length) {
+    for (let i = 0; i < a.length - 1; i++) jobs.push(() => tryOne(a.slice(0, i) + a[i + 1] + a[i] + a.slice(i + 2)));
+    for (let i = 0; i <= a.length; i++) jobs.push(() => [...B58].some((c) => tryOne(a.slice(0, i) + c + a.slice(i))));
+  }
+  for (let j = 0; j < jobs.length; j++) {
+    if (jobs[j]()) break;
+    if (j % 8 === 7) await new Promise((r) => setTimeout(r, 0));
+  }
+  return [...found];
 }

@@ -59,7 +59,7 @@
   --ix-warning: #e8b04a;
   --ix-critical: #ef6b6b;
   --ix-flow-in: var(--ix-brand-200);
-  --ix-flow-out: #ef6b6b;
+  --ix-flow-out: var(--ix-text);
   --ix-threshold: var(--ix-text-2); /* target lines in charts: dashed neutral */
 
   /* ---- metrics: one hue per measure, same everywhere (charts, keys, figures).
@@ -145,7 +145,7 @@
   --ix-warning: #8a5a00; /* 5.76:1 */
   --ix-critical: #c23434; /* 5.32:1 */
   --ix-flow-in: var(--ix-brand-700);
-  --ix-flow-out: #c23434;
+  --ix-flow-out: var(--ix-text);
   --ix-threshold: var(--ix-text-2);
 
   --ix-m-time: #2a78d6;
@@ -222,7 +222,7 @@
     --ix-warning: #8a5a00;
     --ix-critical: #c23434;
     --ix-flow-in: var(--ix-brand-700);
-    --ix-flow-out: #c23434;
+    --ix-flow-out: var(--ix-text);
     --ix-threshold: var(--ix-text-2);
 
     --ix-m-time: #2a78d6;

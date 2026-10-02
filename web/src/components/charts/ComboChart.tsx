@@ -287,7 +287,7 @@ export default function ComboChart({
                 <span className={s.legendLabel}>{x.label}</span>
                 {v != null && <span className={s.legendV}>{x.format(v)}</span>}
                 {overlay && sc && !off && (
-                  <span className={s.legendRange} title="The scale this series is drawn on">
+                  <span className={s.legendRange} title="The scale of this series">
                     scale {(sc.lane.tick ?? x.format)(sc.min)} to {(sc.lane.tick ?? x.format)(sc.max)}
                   </span>
                 )}

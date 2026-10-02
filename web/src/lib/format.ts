@@ -55,28 +55,12 @@ export function splitAmount(a: Amount, maxDecimals = 8) {
   };
 }
 
-/** Plain text amount, e.g. "1,234.5 IXI". */
-export function ixiText(a: Amount, maxDecimals = 8) {
-  const s = splitAmount(a, maxDecimals);
-  return `${s.sign}${s.whole}${s.frac ? '.' + s.frac : ''} IXI`;
-}
-
-/** Amount rounded for headline figures, e.g. "13.55B IXI". */
-export function ixiCompact(a: Amount | number) {
-  return `${compact(typeof a === 'number' ? a : Number(a), 2)} IXI`;
-}
-
 const pad = (n: number) => String(n).padStart(2, '0');
 
 /** "2026-09-24 21:04:11 UTC" */
 export function utc(ts: number) {
   const d = new Date(ts * 1000);
   return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC`;
-}
-
-export function utcDate(ts: number) {
-  const d = new Date(ts * 1000);
-  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -130,15 +114,7 @@ export const TX_TYPE_LABEL: Record<number, string> = {
   6: 'Multisig signature',
 };
 
-export const TX_TYPE_LONG: Record<number, string> = {
-  0: 'Normal transaction',
-  1: 'Proof-of-work (legacy)',
-  2: 'Signing reward',
-  3: 'Genesis transaction',
-  4: 'Multisig transaction',
-  5: 'Change multisig wallet',
-  6: 'Multisig add signature',
-};
+export const TX_TYPE_LONG: Record<number, string> = TX_TYPE_LABEL;
 
 /** Middle-truncate a hash for compact display. */
 export function middle(s: string, head = 8, tail = 6) {

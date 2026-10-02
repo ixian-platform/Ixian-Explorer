@@ -146,7 +146,7 @@ export default function StepChart({
         </div>
       )}
       <p className="ix-sr" aria-live="polite">
-        {hx != null ? `Block ${int(hx)}: ${hv ?? 'share of supply'} IXI` : ''}
+        {hx != null ? `Block ${int(hx)}: ${hv != null ? `${hv} IXI` : 'share of supply'}` : ''}
       </p>
     </div>
   );

@@ -77,7 +77,13 @@ export default function IxiView() {
           <Fig
             k="Next change"
             v={next ? `${int(next.to ?? 0)} IXI per block` : <Skel w={140} h={24} />}
-            sub={next && daysToNext != null ? `at block ${int(next.at)}, in about ${Math.round(daysToNext)} days` : undefined}
+            sub={
+              next && daysToNext != null ? (
+                <>
+                  at block {int(next.at)}, in about {Math.round(daysToNext)} days <DemoTag />
+                </>
+              ) : undefined
+            }
           />
           <Fig mark="ixi" k="At genesis" v={`${compact(GENESIS_SUPPLY, 4)} IXI`} sub={<DocLink href={links.docs.emission}>Premine</DocLink>} />
         </Figures>
@@ -86,7 +92,7 @@ export default function IxiView() {
       <Section
         id="emissions"
         title="Emissions"
-        lead="New IXI enters only through signing rewards, paid to the DLT nodes that sign each block."
+        lead="New IXI comes only from block signing. The signing reward is paid to the DLT nodes that sign each block."
         aside={<DocLink href={links.docs.emission}>IXI emission</DocLink>}
       >
         <div className={s.emGrid}>

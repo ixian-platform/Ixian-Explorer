@@ -381,18 +381,11 @@ export function rewardSplit(h: number) {
   const share = Math.floor(total / n);
   return { total, n, share, rem: total - share * n };
 }
-export const signerShare = (h: number) => rewardSplit(h).share;
 
 export function signers(h: number): number[] {
   const out: number[] = [];
   for (let n = 0; n < DLT_COUNT; n++) if (signed(n, h)) out.push(n);
   return out;
-}
-
-export function activeDlt(h: number): number {
-  let c = 0;
-  for (let n = 0; n < DLT_COUNT; n++) if (nodeActive(n, h)) c++;
-  return c;
 }
 
 export const mined = (h: number) => h > 1 && h <= MINING_END && hf(h, 77) < 0.5;

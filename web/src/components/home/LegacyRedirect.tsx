@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { legacyTarget } from '@/lib/lost';
 
 /**
  * Keeps old explorer links working: index.php?p=block&id=123 and friends
@@ -10,22 +11,8 @@ import { useRouter } from 'next/navigation';
 export default function LegacyRedirect() {
   const router = useRouter();
   useEffect(() => {
-    const q = new URLSearchParams(window.location.search);
-    const p = q.get('p');
-    if (!p) return;
-    const id = q.get('id') ?? '';
-    const map: Record<string, string> = {
-      block: `/block?h=${encodeURIComponent(id)}`,
-      transaction: `/tx?id=${encodeURIComponent(id)}`,
-      address: `/address?a=${encodeURIComponent(id.split('_')[0])}`,
-      search: `/search?q=${encodeURIComponent(q.get('q') ?? '')}`,
-      nodes: '/network',
-      network: '/stats',
-      top: '/ixi#top',
-      emissions: '/ixi',
-      devblocks: '/blocks?view=detailed',
-    };
-    if (map[p]) router.replace(map[p]);
+    const to = legacyTarget(window.location.search);
+    if (to) router.replace(to);
   }, [router]);
   return null;
 }

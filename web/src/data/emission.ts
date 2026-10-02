@@ -5,13 +5,9 @@
  * Where the docs and the PHP explorer's code (include/ixianlib.php) differ,
  * the docs win.
  */
-import { links } from '@/lib/links';
 
 export const BLOCK_SECONDS = 30; // docs: network-parameters, "Block Generation Interval: 30 seconds"
 export const BLOCKS_PER_DAY = 2880;
-export const REWARD_MATURITY = 960; // docs: network-parameters, rewardMaturity
-export const SIGNER_RATIO = 0.75; // docs: network-parameters, networkSignerConsensusRatio
-export const MAX_SIGNERS = 1000; // docs: network-parameters, maximumBlockSigners
 export const GENESIS_SUPPLY = 2_000_320_000; // docs: ixi-emission, premine
 
 export interface RewardStep {
@@ -34,16 +30,6 @@ export const SIGNING_SCHEDULE: RewardStep[] = [
   { from: 15_768_000, to: 105_119_999, reward: 45 },
   { from: 105_120_000, to: null, reward: 36 },
 ];
-
-/** Argon2 mining rewards, legacy (docs: ixi-emission, "Argon2 Mining Rewards"). */
-export const MINING_SCHEDULE: RewardStep[] = [
-  { from: 1, to: 1_051_199, reward: null, note: 'Rises linearly from 10 IXI' },
-  { from: 1_051_200, to: 1_801_999, reward: 4740.4 },
-  { from: 1_802_000, to: 6_307_199, reward: 2304 },
-];
-
-/** Docs roadmap: "Argon2 Mining Deprecation", completed Q2 2026. */
-export const MINING_RETIRED = { label: 'Q2 2026', href: links.docs.roadmap };
 
 /** Signing reward per block in IXI at a height (null for the supply-share eras). */
 export function signingRewardAt(h: number): number | null {

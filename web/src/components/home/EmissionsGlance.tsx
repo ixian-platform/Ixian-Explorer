@@ -39,7 +39,7 @@ export default function EmissionsGlance() {
         <div className={s.emisCell}>
           <p className={s.cellK}>Signing reward</p>
           <p className={s.emisV}>{reward != null ? `${int(reward)} IXI` : <Skel w={120} h={30} />}</p>
-          <p className={s.cellSub}>per block, split among its signers</p>
+          <p className={s.cellSub}>per block, shared by its signers</p>
         </div>
         <div className={s.emisCell}>
           <p className={s.cellK}>Next change</p>
@@ -71,7 +71,7 @@ export default function EmissionsGlance() {
         </div>
         <div className={s.emisCell}>
           <p className={s.cellK}>
-            Supply, 90 days <DemoTag />
+            In circulation, 90 days <DemoTag />
           </p>
           <p className={s.emisV}>{last != null ? `${compact(last, 2)} IXI` : <Skel w={130} h={30} />}</p>
           <div className={s.spark}>
@@ -82,7 +82,7 @@ export default function EmissionsGlance() {
                 width={240}
                 height={44}
                 live
-                label={`Supply rose from ${int(first)} to ${int(last)} IXI over 90 days.`}
+                label={`In circulation: ${int(first)} to ${int(last)} IXI over 90 days.`}
               />
             ) : (
               <Skel h={44} />

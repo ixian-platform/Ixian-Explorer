@@ -1,10 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
-import '@/styles/reset.css';
-import '@/styles/tokens.css';
-import '@/styles/theme.css';
-import '@/styles/globals.css';
+import '@/styles/index.css';
 import Header from '@/components/shell/Header';
 import Footer from '@/components/shell/Footer';
 import Palette from '@/components/search/Palette';

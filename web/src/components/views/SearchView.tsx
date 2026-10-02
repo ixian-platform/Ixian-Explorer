@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { source } from '@/data/source';
@@ -14,7 +13,7 @@ import { StateBox, Skel, DocLink, RetryButton } from '@/components/ui/Primitives
 import p from '@/components/page/Page.module.css';
 import s from './Search.module.css';
 
-type Phase = { state: 'resolving' } | { state: 'missing'; what: string } | { state: 'bad'; reason: string } | { state: 'error' } | { state: 'idle' };
+type Phase = { state: 'resolving' } | { state: 'bad'; reason: string } | { state: 'error' } | { state: 'idle' };
 
 /**
  * Search results. A complete query resolves straight to its page; anything
@@ -31,7 +30,16 @@ export default function SearchView() {
     const k = classify(q, status?.blockheight ?? null);
     if (k.kind === 'empty') return setPhase({ state: 'idle' });
     if (k.kind === 'partial') return setPhase({ state: 'bad', reason: k.hint });
-    if (k.kind === 'invalid') return setPhase({ state: 'bad', reason: k.reason });
+    if (k.kind === 'invalid') {
+      // pages that explain it better: a height still to come, an address or ID with a typo
+      const to = /^#?\d[\d,]*$/.test(q)
+        ? Number(q.replace(/[#,]/g, '')) >= 1 && `/block?h=${q.replace(/[#,]/g, '')}`
+        : /^(?:[a-z]{1,4}-)?\d+-\S{20,}$/.test(q)
+          ? `/tx?id=${encodeURIComponent(q)}`
+          : /^[0-9A-Za-z_]{40,}$/.test(q) && `/address?a=${encodeURIComponent(q)}`;
+      if (to) return router.replace(to);
+      return setPhase({ state: 'bad', reason: k.reason });
+    }
     let alive = true;
     setPhase({ state: 'resolving' });
     const go = () => {
@@ -50,11 +58,7 @@ export default function SearchView() {
       .then((r) => {
         if (!alive) return;
         if (r) go();
-        else
-          setPhase({
-            state: 'missing',
-            what: k.kind === 'height' ? `Block ${k.height.toLocaleString('en')}` : k.kind === 'blockHash' ? 'A block with this hash' : 'A transaction with this ID',
-          });
+        else router.replace(routeFor(k)!);
       })
       .catch(() => alive && setPhase({ state: 'error' }));
     return () => {
@@ -77,14 +81,6 @@ export default function SearchView() {
             <Skel w="40%" h={14} />
           </div>
         )}
-        {phase.state === 'missing' && (
-          <StateBox kind="notfound" title={`${phase.what} was not found`} action={<Link href="/blocks" className="ix-btn">Browse blocks</Link>}>
-            <p className="ix-mono" style={{ wordBreak: 'break-all' }}>
-              {middle(q, 40, 20)}
-            </p>
-            <p style={{ marginTop: 8 }}>The format is right, but nothing on the chain matches it. Check for a missing or extra character.</p>
-          </StateBox>
-        )}
         {phase.state === 'bad' && (
           <StateBox kind="notfound" title="Nothing to open yet">
             <p className="ix-mono" style={{ wordBreak: 'break-all', color: 'var(--ix-text)' }}>
@@ -93,7 +89,7 @@ export default function SearchView() {
             <p style={{ marginTop: 8 }}>{phase.reason}</p>
           </StateBox>
         )}
-        {phase.state === 'error' && <StateBox kind="error" title="Search could not reach the data" action={<RetryButton onClick={() => setNonce((n) => n + 1)} />} />}
+        {phase.state === 'error' && <StateBox kind="error" title="Search could not reach the data." action={<RetryButton onClick={() => setNonce((n) => n + 1)} />} />}
 
         <div className={s.help}>
           <h2 className={s.helpTitle}>What you can search</h2>

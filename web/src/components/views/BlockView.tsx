@@ -2,16 +2,17 @@
 
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { TxType } from '@/data/types';
 import { source } from '@/data/source';
 import { useQuery, useStatus } from '@/lib/hooks';
-import { int, compact, hashrate, utc, duration, TX_TYPE_LABEL } from '@/lib/format';
+import { int, compact, hashrate, utc, TX_TYPE_LABEL } from '@/lib/format';
 import { signingRewardAt, miningRewardAt } from '@/data/emission';
 import { links } from '@/lib/links';
 import { PageHead, Section, Figures, Fig, Raw } from '@/components/page/Page';
 import { Amount, Hash, KV, Time, Skel, StateBox, RetryButton, Pager, DocLink, CopyButton } from '@/components/ui/Primitives';
 import { DemoTag } from '@/components/ui/Demo';
+import { BlockAhead, BlockZero, BlockHashLost } from '@/components/lost/BlockLost';
 import { BlockTxTable } from '@/components/tables/TxTable';
 import Icon from '@/components/Icon';
 import p from '@/components/page/Page.module.css';
@@ -37,6 +38,18 @@ export default function BlockView() {
   useEffect(() => {
     if (hashParam && block.status === 'ok' && block.data) router.replace(`/block?h=${block.data.id}`);
   }, [hashParam, block.status, block.data, router]);
+
+  // a block that was ahead of the chain: load it once the chain reaches it
+  const ahead = height != null && latest != null && height > latest;
+  const wasAhead = useRef(false);
+  const reloadBlock = block.reload;
+  useEffect(() => {
+    if (ahead) wasAhead.current = true;
+    else if (wasAhead.current && latest != null) {
+      wasAhead.current = false;
+      reloadBlock();
+    }
+  }, [ahead, latest, reloadBlock]);
 
   const [page, setPage] = useState(0);
   const [type, setType] = useState<TxType | 'all'>('all');
@@ -74,28 +87,22 @@ export default function BlockView() {
       </div>
     );
   }
-  if (block.status === 'notfound' || (height != null && latest != null && height > latest && block.status !== 'ok')) {
+  if (height != null && height < 1) return <BlockZero height={height} />;
+  if (height != null && latest != null && height > latest && block.status !== 'ok') return <BlockAhead height={height} />;
+  if (block.status === 'notfound') {
+    if (height == null && hashParam) return <BlockHashLost hash={hashParam} />;
     return (
       <div className={`ix-container ${p.page}`}>
         <StateBox
           kind="notfound"
-          title={height != null ? `Block ${int(height)} not found` : 'No block with this hash'}
+          title={`Block ${int(height)} not found.`}
           action={
-            <>
-              {latest != null && (
-                <Link href={`/block?h=${latest}`} className="ix-btn">
-                  Latest block ({int(latest)})
-                </Link>
-              )}
-              <Link href="/blocks" className="ix-btn ix-btn--ghost">
-                All blocks
-              </Link>
-            </>
+            <Link href="/blocks" className="ix-btn">
+              All blocks
+            </Link>
           }
         >
-          {height != null && latest != null && height > latest
-            ? `The chain is at block ${int(latest)}. At one block every 30 seconds, block ${int(height)} is about ${duration((height - latest) * 30)} away.`
-            : 'Check the hash for typos: block hashes are 128 hex characters.'}
+          The explorer has not indexed this block. It may still be catching up.
         </StateBox>
       </div>
     );
@@ -103,7 +110,7 @@ export default function BlockView() {
   if (block.status === 'error' && !b) {
     return (
       <div className={`ix-container ${p.page}`}>
-        <StateBox kind="error" title="This block could not be loaded" action={<RetryButton onClick={block.reload} />}>
+        <StateBox kind="error" title="This block could not be loaded." action={<RetryButton onClick={block.reload} />}>
           {block.error.message}
         </StateBox>
       </div>
@@ -233,7 +240,7 @@ export default function BlockView() {
         }
       >
         {txs.status === 'error' ? (
-          <StateBox kind="error" title="Transactions could not be loaded" action={<RetryButton onClick={txs.reload} />} />
+          <StateBox kind="error" title="Transactions could not be loaded." action={<RetryButton onClick={txs.reload} />} />
         ) : tx && tx.total === 0 ? (
           <StateBox kind="empty" title={type === 'all' ? 'No transactions in this block' : `No ${TX_TYPE_LABEL[type as number].toLowerCase()} transactions here`}>
             {type === 'all' ? 'The block carries only its header.' : 'Try another type, or show all.'}

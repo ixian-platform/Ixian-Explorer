@@ -194,7 +194,7 @@ export default function BlocksView() {
       {(!rows || rows.length > 0) && pager('top')}
 
       {(slow ? slowList : list).status === 'error' && !base ? (
-        <StateBox kind="error" title="Blocks could not be loaded" action={<RetryButton onClick={(slow ? slowList : list).reload} />} />
+        <StateBox kind="error" title="Blocks could not be loaded." action={<RetryButton onClick={(slow ? slowList : list).reload} />} />
       ) : rows && rows.length === 0 ? (
         <StateBox kind="empty" title="No blocks here" action={<Link href="/blocks" className="ix-btn">Newest blocks</Link>} />
       ) : (

@@ -363,20 +363,6 @@ export function KV({ items }: { items: { k: ReactNode; v: ReactNode; hint?: stri
   );
 }
 
-/** Frame with the site's corner marks. */
-export function Frame({ children, className, as = 'div' }: { children: ReactNode; className?: string; as?: 'div' | 'section' }) {
-  const T = as;
-  return (
-    <T className={`${s.frame} ${className ?? ''}`}>
-      <i className={s.cornerTL} aria-hidden />
-      <i className={s.cornerTR} aria-hidden />
-      <i className={s.cornerBL} aria-hidden />
-      <i className={s.cornerBR} aria-hidden />
-      {children}
-    </T>
-  );
-}
-
 /** External docs link with the outbound arrow. */
 export function DocLink({ href, children }: { href: string; children: ReactNode }) {
   return (

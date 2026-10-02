@@ -154,7 +154,7 @@ export default function NetworkView() {
           <Fig mark="s2" k="S2 nodes" v={status ? int(status.nodes_r) : <Skel w={60} h={24} />} sub={<DocLink href={links.docs.operatorsS2}>Run an S2 node</DocLink>} />
           <Fig
             k="Countries"
-            v={unpublished ? '—' : countries != null ? int(countries) : <Skel w={40} h={24} />}
+            v={unpublished ? '–' : countries != null ? int(countries) : <Skel w={40} h={24} />}
             sub={unpublished ? 'locations not published yet' : cities != null ? `${int(cities)} cities` : undefined}
           />
           <Fig
@@ -167,11 +167,11 @@ export default function NetworkView() {
         </Figures>
       </div>
 
-      <Section title="Where the nodes are" lead="City-level positions only, slightly offset. Node IP addresses are never shown or sent anywhere from your browser.">
+      <Section title="Where the nodes are" lead="City-level positions only, slightly offset. Node IP addresses are never shown.">
         {unpublished ? (
           <GlobePanel nodes={[]} variant="page" unpublished />
         ) : nodes.status === 'error' ? (
-          <StateBox kind="error" title="The node list could not be loaded" action={<RetryButton onClick={nodes.reload} />} />
+          <StateBox kind="error" title="The node list could not be loaded." action={<RetryButton onClick={nodes.reload} />} />
         ) : (
           <GlobePanel nodes={list} variant="page" initialCity={cityParam} />
         )}
@@ -184,7 +184,7 @@ export default function NetworkView() {
             <Versions nodes={list} counts={versions.data} kind="s2" />
           </div>
         ) : unpublished && versions.status !== 'loading' ? (
-          <StateBox kind="empty" title="Node versions aren't available yet" />
+          <StateBox kind="empty" title="Node versions aren't available yet." />
         ) : (
           <Skel h={120} />
         )}
@@ -248,7 +248,7 @@ export default function NetworkView() {
           }
         >
           {rows && rows.length === 0 ? (
-            <StateBox kind="empty" title="No nodes match" action={<button className="ix-btn ix-btn--sm" onClick={() => (setText(''), setKind('all'))}>Clear filters</button>} />
+            <StateBox kind="empty" title="No nodes match." action={<button className="ix-btn ix-btn--sm" onClick={() => (setText(''), setKind('all'))}>Clear filters</button>} />
           ) : (
             <>
               <div className={p.tableWrap}>
@@ -315,7 +315,7 @@ export default function NetworkView() {
           )}
           <p className={s.privacy}>
             How locations work: {source.kind === 'mock' ? 'in this demo, nodes are placed in generated cities. ' : ''}With real data, the explorer server
-            resolves each node&apos;s IP to a city with a local copy of a geo database. IPs never leave the server and are never sent to a third party.{' '}
+            resolves each node&apos;s IP to a city with a local copy of a geo database. IPs never leave the server.{' '}
             <a href="https://db-ip.com" className="ix-link" target="_blank" rel="noopener noreferrer">
               IP geolocation by DB-IP
             </a>
