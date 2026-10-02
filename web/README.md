@@ -7,7 +7,10 @@ npm install
 npm run dev        # http://localhost:3000
 npm run build      # static site in out/ (upload it to the static host)
 npm run typecheck
+npm run check      # type check, unit tests, build, browser and accessibility tests
 ```
+
+The browser tests use Playwright; the first time, run `npx playwright install chromium`. They run against the built site with the demo data.
 
 ## Data
 
