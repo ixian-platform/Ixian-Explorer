@@ -1,0 +1,63 @@
+.emGrid {
+  display: grid;
+  gap: 24px 48px;
+}
+@media (min-width: 1000px) {
+  .emGrid {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+.emChart {
+  min-width: 0;
+}
+.h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+.sub {
+  margin: 3px 0 12px;
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-label);
+}
+.sched {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ix-fs-label);
+}
+.sched th,
+.sched td {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--ix-line);
+  text-align: left;
+  white-space: nowrap;
+}
+.sched th {
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-tiny);
+  font-weight: 500;
+  border-bottom-color: var(--ix-line-2);
+}
+.sched th:last-child,
+.sched td:last-child {
+  text-align: right;
+  white-space: normal;
+}
+.sched tr[data-current] td {
+  color: var(--ix-text);
+  font-weight: 560;
+}
+.sched td {
+  color: var(--ix-text-2);
+}
+.nowTag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 6px;
+  border: 1px solid var(--ix-line-strong);
+  border-radius: var(--ix-r-xs);
+  color: var(--ix-text);
+  font-size: var(--ix-fs-micro);
+  font-weight: 500;
+  line-height: 18px;
+}

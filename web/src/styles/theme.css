@@ -1,0 +1,246 @@
+/* ==========================================================================
+   ixiscope theme layer: light mode and the data palette.
+
+   tokens.css (ixian.io, copied unchanged) defines the dark theme. This file
+   1. adds ixiscope tokens (overlay channels, data ink, the data palette,
+      status, globe) for dark, and
+   2. redefines every semantic token for light.
+
+   Theme selection: html[data-theme] is set before first paint by the inline
+   script in app/layout.tsx from the saved choice; with no saved choice the
+   system setting decides (the media query below covers no-JS too).
+
+   Palette rules:
+   - Green stays action, focus and live. Node identity: DLT green, S2 blue.
+   - Transaction types: transfer is neutral ink; signing reward violet,
+     PoW solution orange, multisig teal; genesis is neutral (shape only).
+     Every colour sits next to a text label and a shape.
+   - Magnitude (IXI distribution): one hue, the brand ramp, ordinal.
+   - Status (good, warning, critical) and flow (in, out) are reserved and
+     always come with an icon or a sign.
+   - Charts: each measure has one hue (--ix-m-*); "required" values are the same hue, dashed; targets are dashed neutral (--ix-threshold).
+   All categorical sets were checked with the dataviz validator per mode.
+   ========================================================================== */
+
+:root {
+  /* ---- overlay channels (use as rgb(var(--ix-fg-rgb) / 0.04)) --------- */
+  --ix-fg-rgb: 243 247 244; /* tints over the page */
+  --ix-bg-rgb: 10 15 12; /* glass: header, sticky bars */
+  --ix-surface-rgb: 17 23 18; /* glass: cards over the globe */
+  --ix-scrim: rgb(5 8 6 / 0.72);
+  --ix-shadow: rgb(0 0 0 / 0.85);
+
+  /* ---- data ink: single-series charts, bars, rules (strong → quiet) ---- */
+  --ix-ink-1: var(--ix-grey-200); /* series line */
+  --ix-ink-2: var(--ix-grey-400); /* bars, points */
+  --ix-ink-3: var(--ix-grey-500); /* secondary marks, "now" rule */
+  --ix-ink-4: var(--ix-grey-600); /* reference rules, crosshair */
+  --ix-ink-5: var(--ix-grey-700); /* inactive glyphs */
+  --ix-ink-6: var(--ix-grey-800); /* scrollbars */
+
+  /* ---- node identity (globe, map, legends, node lists) ---------------- */
+  --ix-node-dlt: var(--ix-brand-300); /* #5cc96d */
+  --ix-node-s2: #3d7bff;
+
+  /* ---- transaction types (validated all-pairs, dark: ΔE ≥ 9.4 CVD) ---- */
+  --ix-tx-transfer: var(--ix-grey-500);
+  --ix-tx-reward: #9085e9; /* signing reward: violet */
+  --ix-tx-pow: #d95926; /* PoW solution: orange */
+  --ix-tx-multisig: #1aa3a3; /* multisig types: teal */
+  --ix-tx-genesis: var(--ix-grey-300);
+
+  /* ---- magnitude: IXI distribution (ordinal, more = stronger) --------- */
+  --ix-seq-1: var(--ix-brand-200); /* known wallets */
+  --ix-seq-2: var(--ix-brand-500); /* other top 50 */
+  --ix-seq-3: var(--ix-brand-800); /* everyone else */
+
+  /* ---- status and flow (always with an icon or sign) ------------------ */
+  --ix-good: var(--ix-brand-200);
+  --ix-warning: #e8b04a;
+  --ix-critical: #ef6b6b;
+  --ix-flow-in: var(--ix-brand-200);
+  --ix-flow-out: var(--ix-text);
+  --ix-threshold: var(--ix-text-2); /* target lines in charts: dashed neutral */
+
+  /* ---- metrics: one hue per measure, same everywhere (charts, keys, figures).
+          "required" values are the same hue, dashed. Validated per co-occurring
+          set: block status {time, tx, signers}, block signing {difficulty,
+          signers}, nodes {dlt, s2}. --------------------------------------- */
+  --ix-m-time: #3987e5; /* block time */
+  --ix-m-tx: #d55181; /* transactions, TPS */
+  --ix-m-signers: #c98500; /* signatures, required signatures */
+  --ix-m-difficulty: #9085e9; /* signer difficulty, required, hashrate */
+  --ix-m-ixi: var(--ix-brand-300); /* supply, new IXI, balances */
+
+  /* ---- globe ---------------------------------------------------------- */
+  --ix-globe-sphere: #101612;
+  --ix-globe-rim: #17212a; /* a cool lift toward the limb */
+  --ix-globe-haze: #6f9be0; /* bluish */
+  --ix-globe-haze-alpha: 0.0225;
+  --ix-globe-land: #5f6461;
+  --ix-globe-land-alpha: 0.8;
+  --ix-globe-flash: #e2ffe6; /* a DLT node on a new block */
+  --ix-globe-ink: var(--ix-grey-100); /* hover ring */
+  --ix-globe-density: 0.14;
+  --ix-globe-dlt: var(--ix-node-dlt); /* node colours as drawn on the sphere */
+  --ix-globe-s2: var(--ix-node-s2);
+  --ix-globe-route: var(--ix-route);
+}
+
+/* --------------------------------------------------------------------------
+   Light theme. Two selectors, same values: the saved choice, and the system
+   setting when nothing is saved. Keep the two blocks identical.
+   -------------------------------------------------------------------------- */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --ix-bg: var(--ix-grey-50);
+  --ix-surface: #ffffff;
+  --ix-surface-2: var(--ix-grey-200);
+  --ix-line: rgb(10 15 12 / 0.09);
+  --ix-line-2: rgb(10 15 12 / 0.15);
+  --ix-line-strong: #8a8d8b; /* 3.26:1 on bg */
+
+  --ix-text: var(--ix-grey-1000); /* 18.8:1 */
+  --ix-text-2: var(--ix-grey-700); /* 6.76:1 */
+  --ix-text-3: #666967; /* 5.40:1 */
+  --ix-text-disabled: var(--ix-grey-500);
+
+  --ix-action: var(--ix-brand-600); /* white text 4.97:1 */
+  --ix-action-hover: var(--ix-brand-700);
+  --ix-action-press: var(--ix-brand-800);
+  --ix-on-action: #ffffff;
+  --ix-focus: var(--ix-brand-600);
+  --ix-live: var(--ix-brand-500);
+  --ix-disabled-bg: var(--ix-grey-200);
+  --ix-route: #6f8fe0;
+  --ix-green-soft: rgb(55 126 66 / 0.1);
+
+  --ix-fg-rgb: 10 15 12;
+  --ix-bg-rgb: 251 252 251;
+  --ix-surface-rgb: 255 255 255;
+  --ix-scrim: rgb(29 37 29 / 0.32);
+  --ix-shadow: rgb(20 30 24 / 0.22);
+
+  --ix-ink-1: var(--ix-grey-900);
+  --ix-ink-2: var(--ix-grey-700);
+  --ix-ink-3: var(--ix-grey-600);
+  --ix-ink-4: var(--ix-grey-500);
+  --ix-ink-5: var(--ix-grey-400);
+  --ix-ink-6: var(--ix-grey-300);
+
+  --ix-node-dlt: var(--ix-brand-500); /* 3.53:1 */
+  --ix-node-s2: #2f64d8; /* 5.19:1 */
+
+  --ix-tx-transfer: var(--ix-grey-600);
+  --ix-tx-reward: #5b4bc4;
+  --ix-tx-pow: #d0561f;
+  --ix-tx-multisig: #00929a;
+  --ix-tx-genesis: var(--ix-grey-900);
+
+  --ix-seq-1: #1f4a26;
+  --ix-seq-2: var(--ix-brand-500);
+  --ix-seq-3: #6cc47a;
+
+  --ix-good: var(--ix-brand-700); /* 6.67:1 */
+  --ix-warning: #8a5a00; /* 5.76:1 */
+  --ix-critical: #c23434; /* 5.32:1 */
+  --ix-flow-in: var(--ix-brand-700);
+  --ix-flow-out: var(--ix-text);
+  --ix-threshold: var(--ix-text-2);
+
+  --ix-m-time: #2a78d6;
+  --ix-m-tx: #c93f78;
+  --ix-m-signers: #a86d00;
+  --ix-m-difficulty: #5b4bc4;
+  --ix-m-ixi: var(--ix-brand-600);
+  --ix-globe-sphere: #eef2ef; /* a pale sphere */
+  --ix-globe-rim: #dfe6e1;
+  --ix-globe-haze: #7e9a8b; /* soft green-grey */
+  --ix-globe-haze-alpha: 0.07;
+  --ix-globe-land: #a9b0ac; /* grey land dots */
+  --ix-globe-land-alpha: 0.85;
+  --ix-globe-flash: #1f7a33;
+  --ix-globe-ink: var(--ix-grey-1000);
+  --ix-globe-density: 0.05;
+  --ix-globe-dlt: #2c6635;
+  --ix-globe-s2: #1f4fc2;
+  --ix-globe-route: #3355b8; /* traffic, drawn over the sphere */
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --ix-bg: var(--ix-grey-50);
+    --ix-surface: #ffffff;
+    --ix-surface-2: var(--ix-grey-200);
+    --ix-line: rgb(10 15 12 / 0.09);
+    --ix-line-2: rgb(10 15 12 / 0.15);
+    --ix-line-strong: #8a8d8b;
+
+    --ix-text: var(--ix-grey-1000);
+    --ix-text-2: var(--ix-grey-700);
+    --ix-text-3: #666967;
+    --ix-text-disabled: var(--ix-grey-500);
+
+    --ix-action: var(--ix-brand-600);
+    --ix-action-hover: var(--ix-brand-700);
+    --ix-action-press: var(--ix-brand-800);
+    --ix-on-action: #ffffff;
+    --ix-focus: var(--ix-brand-600);
+    --ix-live: var(--ix-brand-500);
+    --ix-disabled-bg: var(--ix-grey-200);
+    --ix-route: #6f8fe0;
+    --ix-green-soft: rgb(55 126 66 / 0.1);
+
+    --ix-fg-rgb: 10 15 12;
+    --ix-bg-rgb: 251 252 251;
+    --ix-surface-rgb: 255 255 255;
+    --ix-scrim: rgb(29 37 29 / 0.32);
+    --ix-shadow: rgb(20 30 24 / 0.22);
+
+    --ix-ink-1: var(--ix-grey-900);
+    --ix-ink-2: var(--ix-grey-700);
+    --ix-ink-3: var(--ix-grey-600);
+    --ix-ink-4: var(--ix-grey-500);
+    --ix-ink-5: var(--ix-grey-400);
+    --ix-ink-6: var(--ix-grey-300);
+
+    --ix-node-dlt: var(--ix-brand-500);
+    --ix-node-s2: #2f64d8;
+
+    --ix-tx-transfer: var(--ix-grey-600);
+    --ix-tx-reward: #5b4bc4;
+    --ix-tx-pow: #d0561f;
+    --ix-tx-multisig: #00929a;
+    --ix-tx-genesis: var(--ix-grey-900);
+
+    --ix-seq-1: #1f4a26;
+    --ix-seq-2: var(--ix-brand-500);
+    --ix-seq-3: #6cc47a;
+
+    --ix-good: var(--ix-brand-700);
+    --ix-warning: #8a5a00;
+    --ix-critical: #c23434;
+    --ix-flow-in: var(--ix-brand-700);
+    --ix-flow-out: var(--ix-text);
+    --ix-threshold: var(--ix-text-2);
+
+    --ix-m-time: #2a78d6;
+    --ix-m-tx: #c93f78;
+    --ix-m-signers: #a86d00;
+    --ix-m-difficulty: #5b4bc4;
+    --ix-m-ixi: var(--ix-brand-600);
+    --ix-globe-sphere: #eef2ef; /* a pale sphere */
+    --ix-globe-rim: #dfe6e1;
+    --ix-globe-haze: #7e9a8b; /* soft green-grey */
+    --ix-globe-haze-alpha: 0.07;
+    --ix-globe-land: #a9b0ac; /* grey land dots */
+    --ix-globe-land-alpha: 0.85;
+    --ix-globe-flash: #1f7a33;
+    --ix-globe-ink: var(--ix-grey-1000);
+    --ix-globe-density: 0.05;
+    --ix-globe-dlt: #2c6635;
+    --ix-globe-s2: #1f4fc2;
+    --ix-globe-route: #3355b8; /* traffic, drawn over the sphere */
+  }
+}

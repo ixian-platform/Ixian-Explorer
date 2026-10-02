@@ -1,0 +1,58 @@
+.filter {
+  position: sticky;
+  top: 60px;
+  z-index: var(--ix-z-sticky);
+  transition: top 400ms var(--ix-ease-out);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-inline: calc(-1 * var(--ix-gutter));
+  padding: 14px var(--ix-gutter);
+  border-bottom: 1px solid var(--ix-line);
+  background: rgb(var(--ix-bg-rgb) / 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.filterNote {
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-label);
+}
+.figs {
+  margin-top: 24px;
+}
+.group {
+  padding-top: clamp(40px, 5vw, 64px);
+}
+.groupTitle {
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ix-line-2);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.grid1 {
+  display: grid;
+  gap: 40px;
+}
+.grid2 {
+  display: grid;
+  gap: 40px;
+}
+@media (min-width: 960px) {
+  .grid2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 40px;
+  }
+}
+.note {
+  margin-top: 16px;
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-label);
+}
+
+/* the header slides away on scroll down; the range bar moves up into its place */
+:global(:root[data-nav-hidden]) .filter {
+  top: 0;
+}

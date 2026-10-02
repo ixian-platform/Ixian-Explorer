@@ -44,6 +44,10 @@ crontab -l | { cat; echo "*/1 * * * * cd /var/www/html/internal && /usr/bin/php 
 crontab -l | { cat; echo "*/5 * * * * cd /var/www/html/internal && /usr/bin/php updatetxstats.php > /dev/null"; } | crontab -
 ```
 
+## ixiscope (new front end)
+The redesigned explorer front end lives in `web/` (a static Next.js site) and reads the explorer's database through the read-only API in `ixiscope-api/`. The existing pages and cron jobs keep working as they are. Setup, including the node map job: `ixiscope-api/README.md`.
+
+
 ## Usage
 Navigate to the explorer's HTTP/s - i.e. http://localhost/index.php.
 

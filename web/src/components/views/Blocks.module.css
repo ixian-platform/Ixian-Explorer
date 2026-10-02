@@ -1,0 +1,144 @@
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 0 8px;
+}
+.jump {
+  display: flex;
+  gap: 6px;
+}
+.jumpInput {
+  width: 150px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-sm);
+  background: transparent;
+  color: var(--ix-text);
+  font-size: var(--ix-fs-label);
+  font-variant-numeric: tabular-nums;
+}
+.jumpInput::placeholder {
+  color: var(--ix-text-3);
+}
+.tr[data-new] {
+  animation: rowIn 800ms var(--ix-ease-out);
+}
+@keyframes rowIn {
+  0% {
+    opacity: 0;
+    background: rgb(var(--ix-fg-rgb) / 0.06);
+  }
+  100% {
+    opacity: 1;
+    background: transparent;
+  }
+}
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  font-size: var(--ix-fs-label);
+}
+.pagerBtns {
+  display: flex;
+  gap: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tr[data-new] {
+    animation: none;
+  }
+}
+
+/* signatures against required: a small meter in the signers colour, the tick is "required" */
+.sigs {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.sigBar {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 4px;
+  border-radius: var(--ix-r-xs);
+  background: var(--ix-surface-2);
+}
+.sigBar i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: var(--ix-r-xs);
+  background: var(--ix-m-signers);
+}
+.sigBar b {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 1px;
+  background: var(--ix-text-2);
+}
+@media (max-width: 640px) {
+  .sigBar {
+    display: none;
+  }
+}
+
+/* the window of blocks opened from a chart */
+.window {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--ix-line-2);
+  border-left: 2px solid var(--ix-text-3);
+  border-radius: var(--ix-r-sm);
+  background: rgb(var(--ix-fg-rgb) / 0.02);
+}
+.windowText {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.windowK {
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-tiny);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.windowV {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  font-size: var(--ix-fs-small);
+}
+.windowActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.pager[data-where='top'] {
+  padding-top: 12px;
+  padding-bottom: 4px;
+}
+.tr[data-out] {
+  opacity: 0.45;
+}
+.edge td {
+  padding: 8px 0 !important;
+  border-bottom: 1px dashed var(--ix-line-strong) !important;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-tiny);
+  letter-spacing: 0.02em;
+}

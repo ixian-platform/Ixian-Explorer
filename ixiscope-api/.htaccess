@@ -1,0 +1,4 @@
+# Only index.php answers the web. The node-map script, the settings and the vendored library are not pages.
+<FilesMatch "^(nodes|settings)\.php$">
+  Require all denied
+</FilesMatch>

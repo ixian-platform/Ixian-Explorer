@@ -1,0 +1,114 @@
+.footer {
+  margin-top: clamp(64px, 8vw, 120px);
+  border-top: 1px solid var(--ix-line);
+  background: linear-gradient(to bottom, rgb(var(--ix-fg-rgb) / 0.012), transparent 60%);
+}
+.top {
+  display: grid;
+  gap: 40px;
+  padding-top: 48px;
+  padding-bottom: 40px;
+}
+.brand {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  max-width: 420px;
+}
+.home {
+  justify-self: start;
+  border-radius: var(--ix-r-sm);
+}
+.tag {
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-small);
+}
+.demo {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-sm);
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-label);
+  line-height: 1.5;
+}
+.demo svg {
+  margin-top: 3px;
+  flex: none;
+}
+.cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 24px;
+}
+.colTitle {
+  margin-bottom: 12px;
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-tiny);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.list {
+  display: grid;
+  gap: 9px;
+}
+.a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-small);
+  transition: color var(--ix-dur-1);
+}
+.a:hover {
+  color: var(--ix-text);
+}
+.ext {
+  opacity: 0.6;
+}
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 18px;
+  padding-bottom: 28px;
+  border-top: 1px solid var(--ix-line);
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-label);
+}
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+@media (min-width: 900px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 64px;
+  }
+  .cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* "Privacy settings": a button that looks like the links beside it */
+.settings {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-small);
+  transition: color var(--ix-dur-1);
+}
+.settings:hover {
+  color: var(--ix-text);
+}
+.settings:focus-visible {
+  outline: 2px solid var(--ix-focus);
+  outline-offset: 2px;
+  border-radius: var(--ix-r-sm);
+}

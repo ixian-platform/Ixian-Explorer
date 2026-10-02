@@ -1,0 +1,373 @@
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.panel[data-variant='hero'] {
+  height: 100%;
+}
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 360px;
+  overflow: hidden;
+}
+.panel[data-variant='hero'] .stage {
+  flex: none;
+  height: min(112vw, 460px);
+  margin-inline: calc(-1 * var(--ix-gutter));
+}
+@media (min-width: 1100px) {
+  .panel[data-variant='hero'] .stage {
+    flex: 1;
+    height: auto;
+    margin-inline: -40px calc(-1 * var(--ix-gutter));
+  }
+}
+.hintTouch {
+  display: none;
+}
+@media (hover: none) {
+  .hintMouse {
+    display: none;
+  }
+  .hintTouch {
+    display: inline;
+  }
+}
+.panel[data-variant='page'] .stage {
+  flex: none;
+  height: clamp(380px, 56vw, 640px);
+  border: 1px solid var(--ix-line);
+  background:
+    radial-gradient(circle at 50% 50%, rgb(var(--ix-fg-rgb) / 0.025), transparent 60%),
+    var(--ix-bg);
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: pan-y;
+  opacity: 0;
+  transition: opacity 900ms var(--ix-ease-out);
+}
+.canvas:active {
+  cursor: grabbing;
+}
+.stage[data-ready] .canvas {
+  opacity: 1;
+}
+.canvas:focus-visible {
+  outline: 1px solid var(--ix-line-strong);
+  outline-offset: -1px;
+}
+
+.flat {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* loading: a quiet outline of the globe, never a spinner */
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(72%, 70vh);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid var(--ix-line-2);
+  background: radial-gradient(circle at 50% 50%, rgb(var(--ix-fg-rgb) / 0.03), transparent 70%);
+}
+
+.dragHint {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-tiny);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ---- bar: filter, legend, list ------------------------------------------ */
+.unpublished {
+  position: absolute;
+  left: 0;
+  bottom: 14px;
+  width: 100%;
+  margin: 0;
+  padding: 0 16px;
+  text-align: center;
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-label);
+  line-height: 1.5;
+  pointer-events: none;
+}
+.unpublished span { color: var(--ix-text-2); }
+
+.bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  padding: 12px 0 0;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-tiny);
+}
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.listBtn {
+  margin-left: auto;
+}
+
+.kDlt,
+.kS2,
+.kRoute,
+.kBlock {
+  display: inline-block;
+  flex: none;
+}
+.kDlt {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ix-node-dlt);
+}
+.kS2 {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ix-node-s2);
+}
+.kRoute {
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, transparent, var(--ix-route));
+}
+.kBlock {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ix-live);
+  box-shadow: 0 0 0 3px var(--ix-green-soft);
+}
+
+/* ---- city card ------------------------------------------------------------ */
+.card {
+  position: absolute;
+  z-index: 5;
+  padding: 12px 12px 10px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-sm);
+  background: rgb(var(--ix-surface-rgb) / 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px -20px var(--ix-shadow);
+  pointer-events: none;
+  animation: cardIn 180ms var(--ix-ease-out);
+}
+.card[data-pinned] {
+  pointer-events: auto;
+  border-color: var(--ix-line-strong);
+}
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.cardCity {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cardCountry {
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-tiny);
+}
+.cardClose {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--ix-r-xs);
+  color: var(--ix-text-2);
+}
+.cardClose:hover {
+  color: var(--ix-text);
+  background: rgb(var(--ix-fg-rgb) / 0.06);
+}
+.cardCounts {
+  display: flex;
+  gap: 14px;
+  margin: 8px 0 8px;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-label);
+}
+.cardCounts span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cardNodes {
+  display: grid;
+  gap: 5px;
+  padding-top: 8px;
+  border-top: 1px solid var(--ix-line);
+}
+.cardNodes li {
+  display: grid;
+  grid-template-columns: 10px auto 1fr;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--ix-fs-tiny);
+}
+.cardVer {
+  font-family: var(--ix-mono);
+  font-size: var(--ix-fs-micro);
+}
+.cardMeta {
+  justify-self: end;
+  color: var(--ix-text-3);
+  white-space: nowrap;
+}
+.cardMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 9px;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-tiny);
+}
+.cardMore:hover {
+  color: var(--ix-text);
+}
+
+/* ---- city list (accessible twin of the globe) ----------------------------- */
+.list {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ix-line);
+}
+.listNote {
+  margin-bottom: 8px;
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-tiny);
+}
+.cityList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 2px 16px;
+  max-height: 320px;
+  overflow: auto;
+}
+.cityBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 6px;
+  border-radius: var(--ix-r-xs);
+  font-size: var(--ix-fs-label);
+  text-align: left;
+}
+.cityBtn:hover,
+.cityBtn[aria-pressed='true'] {
+  background: var(--ix-surface-2);
+}
+.cityName {
+  display: grid;
+  min-width: 0;
+}
+.cityCountry {
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-micro);
+}
+.cityCounts {
+  display: flex;
+  gap: 10px;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-tiny);
+}
+.cityCounts span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 640px) {
+  .listBtn {
+    margin-left: 0;
+  }
+  .legend {
+    gap: 6px 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .canvas {
+    transition: none;
+  }
+  .card {
+    animation: none;
+  }
+}
+
+.failed {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-small);
+  text-align: center;
+}
+
+/* on the wide home hero the city list floats over the globe instead of shrinking it */
+@media (min-width: 1100px) {
+.panel[data-variant='hero'] .list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 52px;
+  z-index: 6;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-sm);
+  background: rgb(var(--ix-surface-rgb) / 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.panel[data-variant='hero'] .cityList {
+  max-height: min(280px, 40vh);
+}
+}

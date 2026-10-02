@@ -1,0 +1,5 @@
+/* One entry, so the order holds in every build: reset, tokens, theme, then globals. */
+@import './reset.css';
+@import './tokens.css';
+@import './theme.css';
+@import './globals.css';

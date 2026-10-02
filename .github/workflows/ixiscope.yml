@@ -1,0 +1,72 @@
+name: ixiscope
+
+# Checks for the new explorer: the front end in web/ and its API in ixiscope-api/.
+# The PHP explorer pages are not touched by these jobs.
+on:
+  push:
+    paths: ['web/**', 'ixiscope-api/**', '.github/workflows/ixiscope.yml']
+  pull_request:
+    paths: ['web/**', 'ixiscope-api/**', '.github/workflows/ixiscope.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Type check and unit tests
+        run: |
+          npm run typecheck
+          npm test
+
+      - name: Build (demo data)
+        run: npm run build
+
+      - name: Browser tests and accessibility (Chromium, phone)
+        run: |
+          npx playwright install --with-deps chromium
+          npx playwright test
+
+      - name: Test report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: web/playwright-report
+          retention-days: 7
+
+      # the build that goes live reads the API; it must not say "Demo data" anywhere
+      - name: Build with real data has no demo markers
+        env:
+          NEXT_PUBLIC_IXISCOPE_SOURCE: api
+          NEXT_PUBLIC_IXISCOPE_API: https://explorer.invalid/ixiscope-api
+        run: |
+          npm run build
+          if grep -l "Demo data" out/*.html; then echo "::error::the real-data build still shows Demo data"; exit 1; fi
+          grep -q "explorer.invalid/ixiscope-api" out/_next/static/chunks/*.js || { echo "::error::the API address is not in the build"; exit 1; }
+
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PHP syntax
+        run: |
+          php --version
+          find ixiscope-api -name '*.php' -print0 | xargs -0 -n1 php -l

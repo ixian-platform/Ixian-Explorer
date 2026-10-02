@@ -1,0 +1,120 @@
+.wrap {
+  position: relative;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-sm);
+  background: rgb(var(--ix-fg-rgb) / 0.03);
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-label);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: border-color var(--ix-dur-1), color var(--ix-dur-1);
+}
+.chip:hover,
+.chip[aria-expanded='true'] {
+  border-color: var(--ix-line-strong);
+  color: var(--ix-text);
+}
+.short {
+  letter-spacing: 0.02em;
+}
+
+.glyph {
+  flex: none;
+  opacity: 0.9;
+}
+
+.pop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: var(--ix-z-overlay);
+  width: min(320px, calc(100vw - 32px));
+  padding: 16px 16px 14px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-md);
+  background: var(--ix-surface);
+  box-shadow: 0 24px 60px -20px var(--ix-shadow);
+}
+.pop[hidden] {
+  display: none;
+}
+.popTitle {
+  font-size: var(--ix-fs-small);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.popBody {
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-label);
+  line-height: 1.5;
+}
+.popBody + .popBody {
+  margin-top: 8px;
+}
+
+/* live indicator */
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-label);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.dot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ix-live);
+  flex: none;
+}
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: ix-ping 2.4s var(--ix-ease-out) infinite;
+}
+.live[data-paused] .dot {
+  background: var(--ix-text-3);
+}
+.live[data-paused] .dot::after {
+  animation: none;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 20px;
+  padding: 0 6px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-xs);
+  color: var(--ix-text-2);
+  font-size: var(--ix-fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.tag .glyph {
+  width: 10px;
+  height: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot::after {
+    animation: none;
+  }
+}

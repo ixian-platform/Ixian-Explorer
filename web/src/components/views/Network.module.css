@@ -1,0 +1,134 @@
+.vGrid {
+  display: grid;
+  gap: 32px;
+}
+@media (min-width: 900px) {
+  .vGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+  }
+}
+.versions {
+  min-width: 0;
+}
+.vTitle {
+  margin-bottom: 10px;
+  font-size: var(--ix-fs-small);
+  font-weight: 600;
+}
+.vTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ix-fs-label);
+}
+.vTable th,
+.vTable td {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--ix-line);
+  text-align: left;
+  font-weight: 400;
+}
+.vTable th {
+  width: 170px;
+  font-size: var(--ix-fs-label);
+}
+.vBarCell {
+  padding-right: 16px !important;
+}
+.vBar {
+  display: block;
+  height: 8px;
+  min-width: 2px;
+  border-radius: 0 2px 2px 0;
+  background: var(--ix-ink-2);
+  opacity: 0.45;
+}
+.vBar[data-kind='dlt'] {
+  background: var(--ix-node-dlt);
+}
+.vBar[data-kind='s2'] {
+  background: var(--ix-node-s2);
+}
+.vBar[data-latest] {
+  opacity: 1;
+}
+.vName {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.vLatest,
+.vOld {
+  font-size: var(--ix-fs-micro);
+  font-weight: 500;
+}
+.vLatest {
+  color: var(--ix-good);
+}
+.vOld {
+  color: var(--ix-text-3);
+}
+.seen {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.vNum {
+  width: 48px;
+  text-align: right !important;
+}
+.more {
+  margin-top: 14px;
+  font-size: var(--ix-fs-label);
+}
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.filterInput {
+  width: 220px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--ix-line-2);
+  border-radius: var(--ix-r-sm);
+  background: transparent;
+  color: var(--ix-text);
+  font-size: var(--ix-fs-label);
+}
+.filterInput::placeholder {
+  color: var(--ix-text-3);
+}
+.kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.kDlt {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ix-node-dlt);
+}
+.kS2 {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ix-node-s2);
+}
+.privacy {
+  max-width: 76ch;
+  margin-top: 18px;
+  color: var(--ix-text-3);
+  font-size: var(--ix-fs-label);
+}
+@media (max-width: 520px) {
+  .filterInput {
+    width: 100%;
+  }
+  .tools {
+    width: 100%;
+  }
+}

@@ -1,0 +1,237 @@
+/* ixiscope base styles. Tokens come from the ixian.io design system
+   (tokens.css, copied unchanged); component styles live in *.module.css. */
+
+/* Theme and data palette tokens live in theme.css (light mode, node and
+   transaction colours, status, globe). */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background: var(--ix-bg);
+  scroll-padding-top: calc(var(--ix-nav-h) + 16px);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--ix-bg);
+  color: var(--ix-text);
+  font-family: var(--ix-font);
+  font-size: var(--ix-fs-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'ss01', 'cv11';
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--ix-action);
+  color: var(--ix-on-action);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ix-focus);
+  outline-offset: 2px;
+  border-radius: var(--ix-r-xs);
+}
+
+/* ---- layout ------------------------------------------------------------ */
+.ix-container {
+  width: 100%;
+  max-width: calc(var(--ix-container) + var(--ix-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--ix-gutter);
+}
+
+/* ---- text utilities ------------------------------------------------------ */
+.ix-mono {
+  font-family: var(--ix-mono);
+  font-size: var(--ix-fs-mono);
+  letter-spacing: 0;
+}
+.ix-num {
+  font-variant-numeric: tabular-nums;
+}
+.ix-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ix-skip {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: var(--ix-z-skip);
+  padding: 10px 16px;
+  border-radius: var(--ix-r-sm);
+  background: var(--ix-action);
+  color: var(--ix-on-action);
+  font-weight: 600;
+  transform: translateY(-160%);
+  transition: transform var(--ix-dur-2) var(--ix-ease-out);
+}
+.ix-skip:focus {
+  transform: none;
+}
+
+/* ---- links -------------------------------------------------------------- */
+.ix-link {
+  color: var(--ix-text);
+  text-decoration: underline;
+  text-decoration-color: var(--ix-line-strong);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color var(--ix-dur-1);
+}
+.ix-link:hover {
+  text-decoration-color: var(--ix-text);
+}
+
+/* ---- buttons (shared, like ixian.io) ------------------------------------ */
+.ix-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding-inline: 14px;
+  border-radius: var(--ix-r-sm);
+  border: 1px solid var(--ix-line-strong);
+  background: transparent;
+  color: var(--ix-text);
+  font-size: var(--ix-fs-small);
+  font-weight: var(--ix-fw-ui);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color var(--ix-dur-1),
+    background-color var(--ix-dur-1),
+    transform var(--ix-dur-1) var(--ix-ease-out);
+}
+.ix-btn:hover {
+  border-color: var(--ix-ink-3);
+  background: rgb(var(--ix-fg-rgb) / 0.04);
+}
+.ix-btn:active {
+  transform: scale(0.98);
+}
+.ix-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+}
+.ix-btn--primary {
+  background: var(--ix-action);
+  border-color: transparent;
+  color: var(--ix-on-action);
+  font-weight: 600;
+}
+.ix-btn--primary:hover {
+  background: var(--ix-action-hover);
+  border-color: transparent;
+}
+.ix-btn--ghost {
+  border-color: transparent;
+}
+.ix-btn--sm {
+  height: 30px;
+  padding-inline: 10px;
+  font-size: var(--ix-fs-label);
+}
+
+kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border: 1px solid var(--ix-line-2);
+  border-bottom-width: 2px;
+  border-radius: var(--ix-r-xs);
+  color: var(--ix-text-2);
+  font-family: var(--ix-font);
+  font-size: var(--ix-fs-micro);
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Skeleton shimmer (never a spinner on layout) */
+@keyframes ix-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+.ix-skel {
+  display: block;
+  border-radius: var(--ix-r-xs);
+  background: linear-gradient(90deg, rgb(var(--ix-fg-rgb) / 0.04) 0%, rgb(var(--ix-fg-rgb) / 0.09) 50%, rgb(var(--ix-fg-rgb) / 0.04) 100%);
+  background-size: 200% 100%;
+  animation: ix-shimmer 1.6s linear infinite;
+}
+
+@keyframes ix-ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  80%, 100% { transform: scale(3); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ix-skel {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* scrollbars: quiet */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ix-ink-6) transparent;
+}
+
+/* ---- metric key: a small mark in the metric's colour next to a label ---- */
+.ix-key {
+  display: inline-block;
+  flex: none;
+  width: 10px;
+  height: 3px;
+  border-radius: var(--ix-r-xs);
+  background: var(--ix-ink-3);
+  vertical-align: middle;
+}
+.ix-key[data-m='time'] { background: var(--ix-m-time); }
+.ix-key[data-m='tx'] { background: var(--ix-m-tx); }
+.ix-key[data-m='signers'] { background: var(--ix-m-signers); }
+.ix-key[data-m='difficulty'] { background: var(--ix-m-difficulty); }
+.ix-key[data-m='ixi'] { background: var(--ix-m-ixi); }
+.ix-key[data-m='dlt'] { width: 7px; height: 7px; border-radius: 50%; background: var(--ix-node-dlt); }
+.ix-key[data-m='s2'] { width: 8px; height: 8px; border-radius: 50%; background: none; border: 1.5px solid var(--ix-node-s2); }
+
+/* ---- status dot: state with a text label, never colour alone ------------ */
+.ix-status {
+  display: inline-block;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ix-ink-4);
+  vertical-align: 1px;
+}
+.ix-status[data-s='good'] { background: var(--ix-good); }
+.ix-status[data-s='warning'] { background: var(--ix-warning); }
+.ix-status[data-s='critical'] { background: var(--ix-critical); }
+
+/* the footer starts below the fold, so it doesn't jump down when a page's data arrives */
+#main {
+  min-height: calc(100svh - var(--ix-nav-h));
+}
